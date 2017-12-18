@@ -21,7 +21,7 @@ namespace GieAndVince.Models
         public string UserName { get; set; }
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "This field is required.")]
-        [StringLength(50,MinimumLength=8, ErrorMessage="Password must 8 characters long")]
+        //[StringLength(50,MinimumLength=8, ErrorMessage="Password must 8 characters long")]
         public string Password { get; set; }
         [DataType(DataType.Password)]
         [DisplayName("Confirm Password")]
@@ -29,5 +29,6 @@ namespace GieAndVince.Models
         public string ConfirmPassword { get; set; }
         public string FullName { get; set; }
         public bool IsAdmin { get; set; }
+        public string LoginErrorMessage { get; set; }
     }
 }
