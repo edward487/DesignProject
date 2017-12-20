@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StoreContainer" CdmEntityContainer="GVDBEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="GVDBModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RawItems">
+      <EntityTypeMapping TypeName="GVDBModel.RawItem">
+        <MappingFragment StoreEntitySet="RawItem">
+          <ScalarProperty Name="RIQuantity" ColumnName="RIQuantity" />
+          <ScalarProperty Name="RIPrice" ColumnName="RIPrice" />
+          <ScalarProperty Name="RIDescription" ColumnName="RIDescription" />
+          <ScalarProperty Name="RIName" ColumnName="RIName" />
+          <ScalarProperty Name="RawID" ColumnName="RawID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
