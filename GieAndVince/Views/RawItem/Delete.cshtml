@@ -1,0 +1,56 @@
+﻿    @model GieAndVince.Models.ViewModel.RawItemViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RawItemViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RIName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RIName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RIDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RIDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RIPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RIPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RIQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RIQuantity)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

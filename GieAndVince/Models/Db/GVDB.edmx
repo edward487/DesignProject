@@ -22,7 +22,7 @@
           <Property Name="RawID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RIName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RIDescription" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="RIPrice" Type="int" Nullable="false" />
+          <Property Name="RIPrice" Type="int" />
           <Property Name="RIQuantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="StoreContainer">
@@ -54,7 +54,7 @@
           <Property Name="RawID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RIName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RIDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="RIPrice" Type="Int32" Nullable="false" />
+          <Property Name="RIPrice" Type="Int32" />
           <Property Name="RIQuantity" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>

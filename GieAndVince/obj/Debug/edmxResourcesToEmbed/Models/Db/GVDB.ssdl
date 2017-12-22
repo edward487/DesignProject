@@ -17,7 +17,7 @@
     <Property Name="RawID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RIName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RIDescription" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="RIPrice" Type="int" Nullable="false" />
+    <Property Name="RIPrice" Type="int" />
     <Property Name="RIQuantity" Type="int" Nullable="false" />
   </EntityType>
   <EntityContainer Name="StoreContainer">

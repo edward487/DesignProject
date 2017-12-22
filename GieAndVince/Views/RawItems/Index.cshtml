@@ -1,0 +1,59 @@
+﻿@model IEnumerable<GieAndVince.Models.Db.RawItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p class="col-md-6">
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="form-group">
+    <div class="col-md-6">
+        <label>Total Expense: @ViewBag.result</label>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RIName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RIDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RIPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RIQuantity)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RIName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RIDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RIPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RIQuantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RawID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RawID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RawID })
+            </td>
+        </tr>
+    }
+
+</table>

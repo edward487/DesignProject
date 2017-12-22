@@ -17,7 +17,7 @@ namespace GieAndVince.Models.Db
         public int RawID { get; set; }
         public string RIName { get; set; }
         public string RIDescription { get; set; }
-        public int RIPrice { get; set; }
+        public Nullable<int> RIPrice { get; set; }
         public int RIQuantity { get; set; }
     }
 }

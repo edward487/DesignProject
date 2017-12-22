@@ -27,7 +27,5 @@ namespace GieAndVince.Models.Db
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<RawItem> RawItems { get; set; }
-
-        public System.Data.Entity.DbSet<GieAndVince.Models.ViewModel.RawItemViewModel> RawItemViewModels { get; set; }
     }
 }

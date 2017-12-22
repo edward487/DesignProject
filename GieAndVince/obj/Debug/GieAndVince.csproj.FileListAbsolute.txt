@@ -40,7 +40,7 @@ C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\bin\M
 C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\bin\Microsoft.AI.Web.xml
-C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\obj\Debug\GieAndVince.csprojResolveAssemblyReference.cache
 C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\obj\Debug\GieAndVince.csproj.CoreCompileInputs.cache
 C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\obj\Debug\GieAndVince.dll
 C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\obj\Debug\GieAndVince.pdb
+C:\Users\ej_963\Desktop\Design project\GieAndVince\GieAndVince\GieAndVince\obj\Debug\GieAndVince.csprojResolveAssemblyReference.cache
