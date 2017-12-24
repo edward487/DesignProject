@@ -4,47 +4,50 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>RawItem</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RIName)
-        </dt>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1 class="modal-title" id="myModalLabel" align="center"> @Html.DisplayFor(model => model.RIName)</h1>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.RIName)
-        </dd>
+    <div class="lh-50">&nbsp;</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RIDescription)
-        </dt>
+    <div class="col-md-offset-3">
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.RIName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.RIName)
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.RIDescription)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RIDescription, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.RIDescription)
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RIPrice)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RIPrice, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.RIPrice)
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.RIPrice)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RIQuantity, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.RIQuantity)
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RIQuantity)
-        </dt>
+            <div class="lh-50">&nbsp;</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.RIQuantity)
-        </dd>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
 
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RawID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

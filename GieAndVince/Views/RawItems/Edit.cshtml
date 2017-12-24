@@ -4,16 +4,17 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h1 class="modal-title" id="myModalLabel" align="center">Edit: @Html.DisplayFor(model => model.RIName)</h1>
+</div>
+<div class="lh-50">&nbsp;</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+<div class="col-md-offset-3">
     <div class="form-horizontal">
-        <h4>RawItem</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.RawID)
 
@@ -49,17 +50,19 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="lh-50">&nbsp;</div>
+
+        <div class="modal-footer">
+            <div class="form-group" >
+                <div class="col-md-5">
+                    <input type="submit" value="Save" class="btn-gv" />
+                </div>
             </div>
         </div>
     </div>
+</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

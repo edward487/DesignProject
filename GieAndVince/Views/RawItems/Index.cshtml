@@ -3,57 +3,257 @@
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    #btnOpenDialog {
+        position: relative;
+        left: 23%;
+        width: 100px;
+        margin-left: -50px;
+        padding: 5px 5px;
+        text-decoration: none;
+        text-align: center;
+        font: 900 12px georgia;
+        color: #2ea80f;
+    }
 
-<h2>Index</h2>
-
-<p class="col-md-6">
-    @Html.ActionLink("Create New", "Create")
+    #dialog-form {
+        font: 900 11px Georgia;
+    }
+</style>
+<h2 align="center">Raw Items</h2>
+<div class="lh-50">&nbsp;</div>
+<p class="col-md-4" style="font-size:20px;">
+    <span class="glyphicon glyphicon-plus"></span>
+    <button href="javascript:void(0);" class="anchorCreate text-success">Add New item</button> 
 </p>
 
 <div class="form-group">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <label>Total Expense: @ViewBag.result</label>
     </div>
 </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RIName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RIDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RIPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RIQuantity)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="scrollbar" id="style-1">
+    <table class="table table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RIName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RIDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RIPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RIQuantity)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RawID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.RawID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.RawID })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.RIName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RIDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RIPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RIQuantity)
+            </th>
+            <th></th>
         </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RIName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RIDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RIPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RIQuantity)
+                </td>
+                <td>
+                    <a href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit text-warning" data-id="@item.RawID">Edit</a> |
+                    <a href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign" data-id="@item.RawID">Details</a> |
+                    <a href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash text-danger" data-id="@item.RawID">Delete</a>
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.RawID }, new { @class = "glyphicon glyphicon-trash text-danger" })*@
+                    <!--<a id="btnOpenDialog" href="#"
+                       class="ui-state-default ui-corner-all"
+                       onclick="$('#dialog-formDelete').dialog('open');" data-id="@item.RawID">
+                        Delete
+                    </a>-->
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<!--Create Modal-->
+<div id='myModalCreate' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentCreate'></div>
+        </div>
+    </div>
+</div>
+<!--End Create Modal-->
+<!--Edit Modal-->
+<div id='myModalEdit' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentEdit'></div>
+        </div>
+    </div>
+</div>
+<!--End Edit Modal-->
+<!--Details Modal-->
+<div id='myModalDetails' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentDetails'></div>
+        </div>
+    </div>
+</div>
+<!--End Details Modal-->
+<!--Delete Modal-->
+<div id='myModalDelete' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentDelete'></div>
+        </div>
+    </div>
+</div>
+<!--End Delete Modal-->
+@section scripts
+{
+    <script>
+        //Create Modal
+        var TeamCreateBackURL = '/RawItems/Create';
+        $(function () {
+            $(".anchorCreate").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamCreateBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        // debugger;
+                        $('#myModalContentCreate').html(data);
+                        $('#myModalCreate').modal(options);
+                        $('#myModalCreate').modal('show');
 
-</table>
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalCreate').modal('hide');
+            });
+        });
+        //End Create Modal
+        //Edit Modal
+        var TeamEditBackURL = '/RawItems/Edit';
+        $(function () {
+            $(".anchorEdit").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamEditBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        // debugger;
+                        $('#myModalContentEdit').html(data);
+                        $('#myModalEdit').modal(options);
+                        $('#myModalEdit').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalEdit').modal('hide');
+            });
+        });
+        //End Edit Modal
+        //Details Modal
+        var TeamDetailPostBackURL = '/RawItems/Details';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        // debugger;
+                        $('#myModalContentDetails').html(data);
+                        $('#myModalDetails').modal(options);
+                        $('#myModalDetails').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalDetails').modal('hide');
+            });
+        });
+        //End Detail Modal
+        //Delete Modal
+        var TeamDeleteBackURL = '/RawItems/Delete';
+        $(function () {
+            $(".anchorDelete").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDeleteBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        // debugger;
+                        $('#myModalContentDelete').html(data);
+                        $('#myModalDelete').modal(options);
+                        $('#myModalDelete').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalDelete').modal('hide');
+            });
+        });
+                //End of Delete Modal
+    </script>
+}

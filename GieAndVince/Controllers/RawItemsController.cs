@@ -44,29 +44,29 @@ namespace GieAndVince.Controllers
             {
                 return HttpNotFound();
             }
-            return View(rawItem);
+            return PartialView(rawItem);
         }
 
         // GET: RawItems/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: RawItems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RawID,RIName,RIDescription,RIPrice,RIQuantity")] RawItem rawItem)
+        public RedirectResult Create([Bind(Include = "RawID,RIName,RIDescription,RIPrice,RIQuantity")] RawItem rawItem)
         {
             if (ModelState.IsValid)
             {
                 db.RawItems.Add(rawItem);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("Index");
             }
 
-            return View(rawItem);
+            return Redirect("Index");
         }
 
         // GET: RawItems/Edit/5
@@ -81,7 +81,7 @@ namespace GieAndVince.Controllers
             {
                 return HttpNotFound();
             }
-            return View(rawItem);
+            return PartialView(rawItem);
         }
 
         // POST: RawItems/Edit/5
@@ -96,7 +96,7 @@ namespace GieAndVince.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(rawItem);
+            return PartialView(rawItem);
         }
 
         // GET: RawItems/Delete/5
@@ -111,7 +111,7 @@ namespace GieAndVince.Controllers
             {
                 return HttpNotFound();
             }
-            return View(rawItem);
+            return PartialView(rawItem);
         }
 
         // POST: RawItems/Delete/5

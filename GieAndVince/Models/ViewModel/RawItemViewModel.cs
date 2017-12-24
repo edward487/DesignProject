@@ -15,11 +15,11 @@ namespace GieAndVince.Models.ViewModel
         [DisplayName("Name")]
         public string RIName { get; set; }
         [Required(ErrorMessage = "This field is required")]
-        [DisplayName("Description")]
+        [DisplayName("Category")]
         public string RIDescription { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DisplayName("Price")]
-        public int RIPrice { get; set; }
+        public Nullable<int> RIPrice { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DisplayName("Quantity")]
         public int RIQuantity { get; set; }
