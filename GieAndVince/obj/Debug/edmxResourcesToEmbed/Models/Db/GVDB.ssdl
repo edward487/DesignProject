@@ -10,6 +10,15 @@
     <Property Name="Fullname" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="IsAdmin" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="MenuRecipe">
+    <Key>
+      <PropertyRef Name="MIRID" />
+    </Key>
+    <Property Name="MIRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MIRName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MIRRecipe" Type="varchar(max)" Nullable="false" />
+    <Property Name="MIRPrice" Type="money" Nullable="false" />
+  </EntityType>
   <EntityType Name="RawItem">
     <Key>
       <PropertyRef Name="RawID" />
@@ -22,6 +31,7 @@
   </EntityType>
   <EntityContainer Name="StoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuRecipe" EntityType="Self.MenuRecipe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RawItem" EntityType="Self.RawItem" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

@@ -1,0 +1,44 @@
+﻿@model GieAndVince.Models.ViewModel.RawItemMenuRecipeViewModel
+
+@{
+    ViewBag.Title = "Checkbox";
+}
+
+<h2>Checkbox</h2>
+
+<input type="checkbox" name="skills" value="Javascript" />Javascript
+<input type="checkbox" name="skills" value="JQuery" />JQuery
+<input type="checkbox" name="skills" value="Css" />Css
+<input type="checkbox" name="skills" value="Html" />Html
+<br /><br />
+
+Selected Skills:
+<div id="divskills"></div>
+<br />
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        //Create Checkbox
+        $(document).ready(function () {
+            $('input[name="skills"]').click(function () {
+                getCheckedCheckBoxes('skills');
+            });
+            var getCheckedCheckBoxes = function (groupName) {
+                var result = $('input[name="' + groupName + '"]:checked');
+                if (result.length > 0) {
+                    var resultString = result.length + "checkboxes checked <br/>";
+                    result.each(function () {
+                        resultString += $(this).val() + "<br/>";
+                    });
+                    $('#div' + groupName).html(resultString);
+                }
+                else {
+                    $('#div' + groupName).html("No Checkbox checked");
+                }
+            };
+        });
+                                  //End Create Checkbox
+    </script>
+}

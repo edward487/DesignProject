@@ -1,0 +1,146 @@
+﻿@model GieAndVince.Models.ViewModel.RawItemMenuRecipeViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<h2>ListRecipes</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="col-md-3">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Pasta</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    @foreach (var item in Model.RawItemModel.Where(f => f.RIDescription == "Pasta"))
+                    {
+                      <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item.RIName)" />@Html.DisplayFor(modelItem => item.RIName)<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Drinks</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item2 in Model.RawItemModel.Where(f => f.RIDescription == "Drinks"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item2.RIName)" />@Html.DisplayFor(modelItem => item2.RIName)<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Sandwiches</a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item3 in Model.RawItemModel.Where(f => f.RIDescription == "Sandwiches"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item3.RIName)" />@Html.DisplayFor(modelItem => item3.RIName)<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Pika-Pika</a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item4 in Model.RawItemModel.Where(f => f.RIDescription == "Pika Pika"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item4.RIName)" />@Html.DisplayFor(modelItem => item4.RIName)<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Dessert</a>
+                </h4>
+            </div>
+            <div id="collapse5" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item5 in Model.RawItemModel.Where(f => f.RIDescription == "Dessert"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item5.RIName)" />@Html.DisplayFor(modelItem => item5.RIName)<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Rice Meal</a>
+                </h4>
+            </div>
+            <div id="collapse6" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item6 in Model.RawItemModel.Where(f => f.RIDescription == "Rice Meal"))
+                      {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item6.RIName)" />@Html.DisplayFor(modelItem => item6.RIName)<br/>
+                      }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br /><br />
+Selected Skills:
+<div id="divrecipe"></div>
+<br />
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        //Create Checkbox
+        $(document).ready(function () {
+            $('input[name="recipe"]').click(function () {
+                getCheckedCheckBoxes('recipe');
+            });
+            var getCheckedCheckBoxes = function (groupName) {
+                var result = $('input[name="' + groupName + '"]:checked');
+                if (result.length > 0) {
+                    var resultString = result.length + "checkboxes checked <br/>";
+                    result.each(function () {
+                        resultString += $(this).val() + "<br/>";
+                    });
+                    $('#div' + groupName).html(resultString);
+                }
+                else {
+                    $('#div' + groupName).html("No Checkbox checked");
+                }
+            };
+        });
+                                  //End Create Checkbox
+    </script>
+}
+
+

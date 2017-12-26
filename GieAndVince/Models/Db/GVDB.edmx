@@ -15,6 +15,15 @@
           <Property Name="Fullname" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="MenuRecipe">
+          <Key>
+            <PropertyRef Name="MIRID" />
+          </Key>
+          <Property Name="MIRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MIRName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MIRRecipe" Type="varchar(max)" Nullable="false" />
+          <Property Name="MIRPrice" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="RawItem">
           <Key>
             <PropertyRef Name="RawID" />
@@ -27,6 +36,7 @@
         </EntityType>
         <EntityContainer Name="StoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuRecipe" EntityType="Self.MenuRecipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RawItem" EntityType="Self.RawItem" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -36,6 +46,7 @@
         <EntityContainer Name="GVDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="GVDBModel.Account" />
           <EntitySet Name="RawItems" EntityType="GVDBModel.RawItem" />
+          <EntitySet Name="MenuRecipes" EntityType="GVDBModel.MenuRecipe" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -56,6 +67,15 @@
           <Property Name="RIDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="RIPrice" Type="Int32" />
           <Property Name="RIQuantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuRecipe">
+          <Key>
+            <PropertyRef Name="MIRID" />
+          </Key>
+          <Property Name="MIRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MIRName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MIRRecipe" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MIRPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -82,6 +102,16 @@
                 <ScalarProperty Name="RIDescription" ColumnName="RIDescription" />
                 <ScalarProperty Name="RIName" ColumnName="RIName" />
                 <ScalarProperty Name="RawID" ColumnName="RawID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuRecipes">
+            <EntityTypeMapping TypeName="GVDBModel.MenuRecipe">
+              <MappingFragment StoreEntitySet="MenuRecipe">
+                <ScalarProperty Name="MIRPrice" ColumnName="MIRPrice" />
+                <ScalarProperty Name="MIRRecipe" ColumnName="MIRRecipe" />
+                <ScalarProperty Name="MIRName" ColumnName="MIRName" />
+                <ScalarProperty Name="MIRID" ColumnName="MIRID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

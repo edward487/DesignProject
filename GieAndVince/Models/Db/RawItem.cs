@@ -11,24 +11,13 @@ namespace GieAndVince.Models.Db
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class RawItem
     {
-        [Key]
         public int RawID { get; set; }
-        [Required(ErrorMessage = "This field is required")]
-        [DisplayName("Name")]
         public string RIName { get; set; }
-        [Required(ErrorMessage = "This field is required")]
-        [DisplayName("Category")]
         public string RIDescription { get; set; }
-        [Required(ErrorMessage = "This field is required")]
-        [DisplayName("Price")]
         public Nullable<int> RIPrice { get; set; }
-        [Required(ErrorMessage = "This field is required")]
-        [DisplayName("Quantity")]
         public int RIQuantity { get; set; }
     }
 }

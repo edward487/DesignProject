@@ -1,0 +1,146 @@
+﻿@model IEnumerable<GieAndVince.Models.Db.RawItem>
+
+@{
+    ViewBag.Title = "ListRecipes";
+}
+
+<h2>ListRecipes</h2>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="col-md-3">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Pasta</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    @foreach (var item in Model.Where(f => f.RIDescription == "Pasta").ToList())
+                    {
+                        <div>@Html.DisplayFor(modelItem => item.RIName)</div>
+                        <span>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.RawID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.RawID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.RawID })
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Drinks</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item2 in Model.Where(f => f.RIDescription == "Drinks").ToList())
+                    {
+                        <div>@Html.DisplayFor(modelItem => item2.RIName)</div>
+                        <span>
+                            @Html.ActionLink("Edit", "Edit", new { id = item2.RawID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item2.RawID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item2.RawID })
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Sandwiches</a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item3 in Model.Where(f => f.RIDescription == "Sandwiches").ToList())
+                    {
+                        <div>@Html.DisplayFor(modelItem => item3.RIName)</div>
+                        <span>
+                            @Html.ActionLink("Edit", "Edit", new { id = item3.RawID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item3.RawID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item3.RawID })
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Pika-Pika</a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item4 in Model.Where(f => f.RIDescription == "Pika Pika").ToList())
+                    {
+                        <div>@Html.DisplayFor(modelItem => item4.RIName)</div>
+                        <span>
+                            @Html.ActionLink("Edit", "Edit", new { id = item4.RawID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item4.RawID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item4.RawID })
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Dessert</a>
+                </h4>
+            </div>
+            <div id="collapse5" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item5 in Model.Where(f => f.RIDescription == "Dessert").ToList())
+                    {
+                        <div>@Html.DisplayFor(modelItem => item5.RIName)</div>
+                        <span>
+                            @Html.ActionLink("Edit", "Edit", new { id = item5.RawID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item5.RawID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item5.RawID })
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Rice Meal</a>
+                </h4>
+            </div>
+            <div id="collapse6" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @foreach (var item6 in Model.Where(f => f.RIDescription == "Rice Meal").ToList())
+                    {
+                        <div>@Html.DisplayFor(modelItem => item6.RIName)</div>
+                        <span>
+                            @Html.ActionLink("Edit", "Edit", new { id = item6.RawID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item6.RawID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item6.RawID })
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>

@@ -152,6 +152,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenuRecipeController.cs" />
     <Compile Include="Controllers\RawItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -174,10 +175,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GVDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Db\MenuRecipe.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Db\RawItem.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AccountViewModel.cs" />
+    <Compile Include="Models\ViewModel\MenuRecipeViewModel.cs" />
+    <Compile Include="Models\ViewModel\RawItemMenuRecipeViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -302,10 +308,13 @@
       <DependentUpon>GVDB.edmx</DependentUpon>
     </Content>
     <Content Include="Content\themes\le-frog\package.json" />
-    <None Include="Scripts\jquery-2.1.0.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.0.js" />
-    <Content Include="Scripts\jquery-2.1.0.min.js" />
-    <Content Include="Scripts\jquery-2.1.0.min.map" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
@@ -339,6 +348,8 @@
     <Content Include="Views\RawItems\Details.cshtml" />
     <Content Include="Views\RawItems\Edit.cshtml" />
     <Content Include="Views\RawItems\Index.cshtml" />
+    <Content Include="Views\MenuRecipe\Index.cshtml" />
+    <Content Include="Views\MenuRecipe\Checkbox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />

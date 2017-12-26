@@ -3,23 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<style>
-    #btnOpenDialog {
-        position: relative;
-        left: 23%;
-        width: 100px;
-        margin-left: -50px;
-        padding: 5px 5px;
-        text-decoration: none;
-        text-align: center;
-        font: 900 12px georgia;
-        color: #2ea80f;
-    }
 
-    #dialog-form {
-        font: 900 11px Georgia;
-    }
-</style>
 <h2 align="center">Raw Items</h2>
 <div class="lh-50">&nbsp;</div>
 <p class="col-md-4" style="font-size:20px;">
@@ -69,12 +53,6 @@
                     <a href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit text-warning" data-id="@item.RawID">Edit</a> |
                     <a href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign" data-id="@item.RawID">Details</a> |
                     <a href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash text-danger" data-id="@item.RawID">Delete</a>
-                    @*@Html.ActionLink("Delete", "Delete", new { id = item.RawID }, new { @class = "glyphicon glyphicon-trash text-danger" })*@
-                    <!--<a id="btnOpenDialog" href="#"
-                       class="ui-state-default ui-corner-all"
-                       onclick="$('#dialog-formDelete').dialog('open');" data-id="@item.RawID">
-                        Delete
-                    </a>-->
                 </td>
             </tr>
         }
