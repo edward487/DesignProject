@@ -1,0 +1,46 @@
+﻿@model GieAndVince.Models.ViewModel.CombinedModels
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateList")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuRecipeModel.MIRName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuRecipeModel.MIRRecipe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuRecipeModel.MIRPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.MenuRecipeList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MIRName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MIRRecipe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MIRPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MIRID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MIRID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MIRID })
+            </td>
+        </tr>
+    }
+
+</table>

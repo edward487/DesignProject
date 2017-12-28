@@ -8,9 +8,10 @@ using GieAndVince.Models.Db;
 
 namespace GieAndVince.Models.ViewModel
 {
-    public class RawItemMenuRecipeViewModel
+    public class CombinedModels
     {
         public List<RawItem> RawItemModel { get; set; }
-        public List<MenuRecipe> MenuRecipeModel { get; set; }
+        public MenuRecipe MenuRecipeModel { get; set; }
+        public List<MenuRecipe> MenuRecipeList { get; set; }
     }
 }

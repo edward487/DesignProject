@@ -1,0 +1,42 @@
+﻿@model GieAndVince.Models.Db.MenuRecipe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MenuRecipe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MIRName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MIRName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MIRRecipe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MIRRecipe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MIRPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MIRPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MIRID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

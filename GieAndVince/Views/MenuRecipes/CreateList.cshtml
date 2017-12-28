@@ -1,0 +1,187 @@
+﻿@model GieAndVince.Models.ViewModel.CombinedModels
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2 align="center">Set Menu Items</h2>
+<br /><br />
+<div class="col-md-1"></div>
+<div class="col-md-10">
+    <div class="col-md-5">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Pasta</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        @foreach (var item in Model.RawItemModel.Where(f => f.RIDescription == "Pasta"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item.RIName)" />@Html.DisplayFor(modelItem => item.RIName)<br />
+                }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Drinks</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @foreach (var item2 in Model.RawItemModel.Where(f => f.RIDescription == "Drinks"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item2.RIName)" />@Html.DisplayFor(modelItem => item2.RIName)<br />
+                }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Sandwiches</a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @foreach (var item3 in Model.RawItemModel.Where(f => f.RIDescription == "Sandwiches"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item3.RIName)" />@Html.DisplayFor(modelItem => item3.RIName)<br />
+                }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Pika-Pika</a>
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @foreach (var item4 in Model.RawItemModel.Where(f => f.RIDescription == "Pika Pika"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item4.RIName)" />@Html.DisplayFor(modelItem => item4.RIName)<br />
+                }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Dessert</a>
+                    </h4>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @foreach (var item5 in Model.RawItemModel.Where(f => f.RIDescription == "Dessert"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item5.RIName)" />@Html.DisplayFor(modelItem => item5.RIName)<br />
+                }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Rice Meal</a>
+                    </h4>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @foreach (var item6 in Model.RawItemModel.Where(f => f.RIDescription == "Rice Meal"))
+                    {
+                        <input type="checkbox" name="recipe" value="@Html.DisplayFor(modelItem => item6.RIName)" />@Html.DisplayFor(modelItem => item6.RIName)<br />
+                }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        @using (Html.BeginForm("Create", "MenuRecipes", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MenuRecipeModel.MIRName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MenuRecipeModel.MIRName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MenuRecipeModel.MIRName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MenuRecipeModel.MIRPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MenuRecipeModel.MIRPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MenuRecipeModel.MIRPrice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MenuRecipeModel.MIRRecipe, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <h5 class="text-danger">*Select Raw items for the specified checkboxes.</h5>
+                            @Html.TextAreaFor(model => model.MenuRecipeModel.MIRRecipe, new { @class = "form-control", id = "divrecipe", rows = 13 })
+                            @Html.ValidationMessageFor(model => model.MenuRecipeModel.MIRRecipe, "", new { @class = "text-danger", id = "divrecipe" })
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="col-md-5 col-md-offset-1">
+                                <input type="submit" value="Create" class="btn-gv" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+<div class="col-md-1"></div>
+<br />
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+<div class="lh-120">&nbsp;</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        //Create Checkbox
+        $(document).ready(function () {
+            $('input[name="recipe"]').click(function () {
+                getCheckedCheckBoxes('recipe');
+            });
+            var getCheckedCheckBoxes = function (groupName) {
+                var result = $('input[name="' + groupName + '"]:checked');
+                if (result.length > 0) {
+                    var resultString = " ";
+                    result.each(function () {
+                        resultString += $(this).val() + ","+"&#10;";
+                    });
+                    $('#div' + groupName).html(resultString);
+                }
+                else {
+                    $('#div' + groupName).html("No Checkbox checked");
+                }
+            };
+        });
+                                  //End Create Checkbox
+    </script>
+}
+
+

@@ -11,12 +11,15 @@ namespace GieAndVince.Models.Db
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class MenuRecipe
     {
+
         public int MIRID { get; set; }
         public string MIRName { get; set; }
+        public int MIRPrice { get; set; }
         public string MIRRecipe { get; set; }
-        public decimal MIRPrice { get; set; }
     }
 }

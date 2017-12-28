@@ -16,8 +16,8 @@
     </Key>
     <Property Name="MIRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MIRName" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="MIRRecipe" Type="varchar(max)" Nullable="false" />
-    <Property Name="MIRPrice" Type="money" Nullable="false" />
+    <Property Name="MIRRecipe" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="MIRPrice" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RawItem">
     <Key>

@@ -152,7 +152,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MenuRecipeController.cs" />
+    <Compile Include="Controllers\MenuRecipesController.cs" />
     <Compile Include="Controllers\RawItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -348,8 +348,11 @@
     <Content Include="Views\RawItems\Details.cshtml" />
     <Content Include="Views\RawItems\Edit.cshtml" />
     <Content Include="Views\RawItems\Index.cshtml" />
-    <Content Include="Views\MenuRecipe\Index.cshtml" />
-    <Content Include="Views\MenuRecipe\Checkbox.cshtml" />
+    <Content Include="Views\MenuRecipes\Delete.cshtml" />
+    <Content Include="Views\MenuRecipes\Details.cshtml" />
+    <Content Include="Views\MenuRecipes\Edit.cshtml" />
+    <Content Include="Views\MenuRecipes\Index.cshtml" />
+    <Content Include="Views\MenuRecipes\CreateList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />

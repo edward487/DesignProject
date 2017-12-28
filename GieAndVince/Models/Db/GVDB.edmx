@@ -21,8 +21,8 @@
           </Key>
           <Property Name="MIRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MIRName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="MIRRecipe" Type="varchar(max)" Nullable="false" />
-          <Property Name="MIRPrice" Type="money" Nullable="false" />
+          <Property Name="MIRRecipe" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="MIRPrice" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RawItem">
           <Key>
@@ -74,8 +74,8 @@
           </Key>
           <Property Name="MIRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MIRName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="MIRRecipe" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MIRPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="MIRRecipe" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MIRPrice" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
