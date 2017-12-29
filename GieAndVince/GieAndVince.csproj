@@ -183,7 +183,7 @@
     </Compile>
     <Compile Include="Models\ViewModel\AccountViewModel.cs" />
     <Compile Include="Models\ViewModel\MenuRecipeViewModel.cs" />
-    <Compile Include="Models\ViewModel\RawItemMenuRecipeViewModel.cs" />
+    <Compile Include="Models\ViewModel\CombinedModels.cs" />
     <Compile Include="Models\ViewModel\RawItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -350,9 +350,9 @@
     <Content Include="Views\RawItems\Index.cshtml" />
     <Content Include="Views\MenuRecipes\Delete.cshtml" />
     <Content Include="Views\MenuRecipes\Details.cshtml" />
-    <Content Include="Views\MenuRecipes\Edit.cshtml" />
     <Content Include="Views\MenuRecipes\Index.cshtml" />
     <Content Include="Views\MenuRecipes\CreateList.cshtml" />
+    <Content Include="Views\MenuRecipes\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />

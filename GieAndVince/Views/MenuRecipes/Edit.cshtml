@@ -4,50 +4,117 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>MenuRecipe</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.MIRID)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MIRName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MIRName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MIRName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MIRRecipe, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MIRRecipe, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MIRRecipe, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MIRPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MIRPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MIRPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h1 class="modal-title" id="myModalLabel" align="center">Edit: @Html.DisplayFor(model => model.MIRName)</h1>
 </div>
+<div class="lh-50">&nbsp;</div>
+<div class="col-md-1"></div>
+<div class="col-md-10 col-md-offset-1">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MIRID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MIRName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MIRName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MIRName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MIRPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MIRPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MIRPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MIRCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.MIRCategory, new List<SelectListItem>
+                            {
+                             new SelectListItem{ Text = "Pasta", Value = "Pasta"},
+                             new SelectListItem{ Text = "Drinks", Value = "Drinks"},
+                             new SelectListItem{ Text = "Sandwiches", Value = "Sandwiches"},
+                             new SelectListItem{ Text = "Pika Pika", Value = "Pika Pika"},
+                             new SelectListItem{ Text = "Dessert", Value = "Dessert"},
+                             new SelectListItem{ Text = "Rice Meal", Value = "Rice Meal"}
+                            }, "Select Category", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MIRCategory, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-offset-2">
+                <input type="checkbox" value="sizes" id="divEnable" />*Check if the item has sizes*
+            </div>
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MIRSize, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.MIRSize, new List<SelectListItem>
+                            {
+                             new SelectListItem{ Text = "Normal Item", Value = "Normal Item", Selected=true},
+                             new SelectListItem{ Text = "R", Value = "R"},
+                             new SelectListItem{ Text = "SBF", Value = "SBF"},
+                             new SelectListItem{ Text = "LBF", Value = "LBF"},
+                            }, "Select Sizes", new { @class = "form-control", id = "removeDisable", disabled = true })
+                    @Html.ValidationMessageFor(model => model.MIRSize, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MIRRecipe, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.MIRRecipe, new { @class = "form-control", id = "divrecipe", rows = 5 })
+                    @Html.ValidationMessageFor(model => model.MIRRecipe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="form-group">
+                    <div class="col-md-5 col-md-offset-1">
+                        <input type="submit" value="Save" class="btn-gv" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="col-md-1"></div>
+<div class="lh-50">&nbsp;</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        //Create Checkbox
+        $(document).ready(function () {
+            $("#divEnable").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#removeDisable").removeAttr("disabled");
+                    $("#removeDisable").focus();
+                } else {
+                    $("#removeDisable").attr("disabled", "disabled");
+                }
+            });
+            $('form').submit(function (e) {
+                $(':disabled').each(function (e) {
+                    $(this).removeAttr('disabled');
+                })
+            });
+        });
+                                                  //End Create Checkbox
+    </script>
+
+
+}

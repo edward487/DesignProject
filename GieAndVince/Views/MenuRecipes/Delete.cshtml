@@ -4,45 +4,22 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h1 class="modal-title" id="myModalLabel" align="center">Delete: @Html.DisplayFor(model => model.MIRName)</h1>
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>MenuRecipe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MIRName)
-        </dt>
+<div class="modal-body">
+    <h3 align="center">Are you sure you want to delete this?</h3>
+</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MIRName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MIRRecipe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MIRRecipe)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MIRPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MIRPrice)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
+<div class="modal-footer">
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" style="margin-right:250px;" />
         </div>
     }
 </div>

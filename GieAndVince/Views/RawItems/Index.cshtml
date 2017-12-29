@@ -50,9 +50,9 @@
                     @Html.DisplayFor(modelItem => item.RIQuantity)
                 </td>
                 <td>
-                    <a href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit text-warning" data-id="@item.RawID">Edit</a> |
-                    <a href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign" data-id="@item.RawID">Details</a> |
-                    <a href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash text-danger" data-id="@item.RawID">Delete</a>
+                    <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@item.RawID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@item.RawID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@item.RawID" style="border-radius:5px; padding:5px;"></button>
                 </td>
             </tr>
         }

@@ -21,8 +21,10 @@
           </Key>
           <Property Name="MIRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MIRName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MIRPrice" Type="money" Nullable="false" />
+          <Property Name="MIRCategory" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MIRSize" Type="varchar" MaxLength="50" />
           <Property Name="MIRRecipe" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="MIRPrice" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RawItem">
           <Key>
@@ -74,8 +76,10 @@
           </Key>
           <Property Name="MIRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MIRName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MIRPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="MIRCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MIRSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MIRRecipe" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="MIRPrice" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -108,8 +112,10 @@
           <EntitySetMapping Name="MenuRecipes">
             <EntityTypeMapping TypeName="GVDBModel.MenuRecipe">
               <MappingFragment StoreEntitySet="MenuRecipe">
-                <ScalarProperty Name="MIRPrice" ColumnName="MIRPrice" />
                 <ScalarProperty Name="MIRRecipe" ColumnName="MIRRecipe" />
+                <ScalarProperty Name="MIRSize" ColumnName="MIRSize" />
+                <ScalarProperty Name="MIRCategory" ColumnName="MIRCategory" />
+                <ScalarProperty Name="MIRPrice" ColumnName="MIRPrice" />
                 <ScalarProperty Name="MIRName" ColumnName="MIRName" />
                 <ScalarProperty Name="MIRID" ColumnName="MIRID" />
               </MappingFragment>

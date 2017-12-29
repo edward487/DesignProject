@@ -9,16 +9,10 @@
 <p>
     @Html.ActionLink("Create New", "CreateList")
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.MenuRecipeModel.MIRName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MenuRecipeModel.MIRRecipe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MenuRecipeModel.MIRPrice)
         </th>
         <th></th>
     </tr>
@@ -30,17 +24,146 @@
                 @Html.DisplayFor(modelItem => item.MIRName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MIRRecipe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MIRPrice)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MIRID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MIRID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MIRID })
+                <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@item.MIRID" style="border-radius:5px; padding:5px;"></button>
+                <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@item.MIRID" style="border-radius:5px; padding:5px;"></button> 
+                <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@item.MIRID" style="border-radius:5px; padding:5px;"></button>
             </td>
         </tr>
     }
 
 </table>
+<!--Edit Modal-->
+<div id='myModalEdit' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentEdit'></div>
+        </div>
+    </div>
+</div>
+<!--End Edit Modal-->
+<!--Details Modal-->
+<div id='myModalDetails' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentDetails'></div>
+        </div>
+    </div>
+</div>
+<!--End Details Modal-->
+<!--Delete Modal-->
+<div id='myModalDelete' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentDelete'></div>
+        </div>
+    </div>
+</div>
+<!--End Delete Modal-->
+@section scripts
+{
+    <script type="text/javascript">
+        //Edit Modal
+        var TeamEditBackURL = '/MenuRecipes/Edit';
+        $(function () {
+            $(".anchorEdit").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamEditBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        // debugger;
+                        $('#myModalContentEdit').html(data);
+                        $('#myModalEdit').modal(options);
+                        $('#myModalEdit').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalEdit').modal('hide');
+            });
+        });
+        //End Edit Modal
+        //Details Modal
+        var TeamDetailPostBackURL = '/MenuRecipes/Details';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        // debugger;
+                        $('#myModalContentDetails').html(data);
+                        $('#myModalDetails').modal(options);
+                        $('#myModalDetails').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalDetails').modal('hide');
+            });
+        });
+        //End Detail Modal
+        //Delete Modal
+        var TeamDeleteBackURL = '/MenuRecipes/Delete';
+        $(function () {
+            $(".anchorDelete").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDeleteBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        // debugger;
+                        $('#myModalContentDelete').html(data);
+                        $('#myModalDelete').modal(options);
+                        $('#myModalDelete').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalDelete').modal('hide');
+            });
+        });
+                    //End of Delete Modal
+    </script>
+
+}

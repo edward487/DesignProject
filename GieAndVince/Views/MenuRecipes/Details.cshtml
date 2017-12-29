@@ -4,39 +4,57 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>MenuRecipe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MIRName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MIRName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MIRRecipe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MIRRecipe)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MIRPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MIRPrice)
-        </dd>
-
-    </dl>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h1 class="modal-title" id="myModalLabel" align="center"> @Html.DisplayFor(model => model.MIRName)</h1>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MIRID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="lh-50">&nbsp;</div>
+
+<div class="col-md-offset-3">
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.MIRName, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.MIRName)
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MIRPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.MIRPrice)
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MIRCategory, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.MIRCategory)
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MIRSize, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.MIRSize)
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MIRRecipe, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.MIRRecipe)
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="lh-50">&nbsp;</div>
+
+        <div class="modal-footer"></div>
+    </div>
+</div>

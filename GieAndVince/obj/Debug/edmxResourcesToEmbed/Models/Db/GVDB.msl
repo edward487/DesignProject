@@ -26,8 +26,10 @@
     <EntitySetMapping Name="MenuRecipes">
       <EntityTypeMapping TypeName="GVDBModel.MenuRecipe">
         <MappingFragment StoreEntitySet="MenuRecipe">
-          <ScalarProperty Name="MIRPrice" ColumnName="MIRPrice" />
           <ScalarProperty Name="MIRRecipe" ColumnName="MIRRecipe" />
+          <ScalarProperty Name="MIRSize" ColumnName="MIRSize" />
+          <ScalarProperty Name="MIRCategory" ColumnName="MIRCategory" />
+          <ScalarProperty Name="MIRPrice" ColumnName="MIRPrice" />
           <ScalarProperty Name="MIRName" ColumnName="MIRName" />
           <ScalarProperty Name="MIRID" ColumnName="MIRID" />
         </MappingFragment>

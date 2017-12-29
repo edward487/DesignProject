@@ -14,9 +14,10 @@ namespace GieAndVince.Controllers
     public class MenuRecipesController : Controller
     {
         private GVDBEntities db = new GVDBEntities();
-
+        //View for CreateList with Raw item and Menu Recipe Model
         public ActionResult CreateList(CombinedModels rm)
         {
+            ViewBag.Successmessage = TempData["SuccessMessage"];
             return View(new CombinedModels
             {
                 RawItemModel = db.RawItems.ToList(),
@@ -34,11 +35,44 @@ namespace GieAndVince.Controllers
             {
                 db.MenuRecipes.Add(m.MenuRecipeModel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["SuccessMessage"] = "Item has been successfuly added";
+                return RedirectToAction("CreateList");
             }
 
-            return View("Createlist",m);
+            return View("CreateList",m);
         }
+
+        // GET: MenuRecipes/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MenuRecipe menuRecipe = db.MenuRecipes.Find(id);
+            if (menuRecipe == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(menuRecipe);
+        }
+
+        // POST: MenuRecipes/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(MenuRecipe menuRecipe)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(menuRecipe).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return PartialView(menuRecipe);
+        }
+
         // GET: MenuRecipes
         public ActionResult Index()
         {
@@ -62,40 +96,9 @@ namespace GieAndVince.Controllers
             {
                 return HttpNotFound();
             }
-            return View(menuRecipe);
+            return PartialView(menuRecipe);
         }
 
-
-        // GET: MenuRecipes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MenuRecipe menuRecipe = db.MenuRecipes.Find(id);
-            if (menuRecipe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(menuRecipe);
-        }
-
-        // POST: MenuRecipes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MIRID,MIRName,MIRRecipe,MIRPrice")] MenuRecipe menuRecipe)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(menuRecipe).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(menuRecipe);
-        }
 
         // GET: MenuRecipes/Delete/5
         public ActionResult Delete(int? id)
@@ -109,7 +112,7 @@ namespace GieAndVince.Controllers
             {
                 return HttpNotFound();
             }
-            return View(menuRecipe);
+            return PartialView(menuRecipe);
         }
 
         // POST: MenuRecipes/Delete/5
