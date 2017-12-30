@@ -1,37 +1,148 @@
 ﻿@model GieAndVince.Models.ViewModel.CombinedModels
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Menu Recipe";
 }
+<style>
+    .scrollbarmr {
+        margin-left: 0px;
+        float: left;
+        height: 250px;
+        width: 350px;
+        overflow-y: scroll;
+        margin-bottom: 25px;
+    }
 
-<h2>Index</h2>
+    #style-1::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #F5F5F5;
+    }
+
+    #style-1::-webkit-scrollbar {
+        width: 12px;
+        background-color: #F5F5F5;
+    }
+
+    #style-1::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+    }
+</style>
+<h2 align="center">Main Menu List</h2>
 
 <p>
     @Html.ActionLink("Create New", "CreateList")
 </p>
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MenuRecipeModel.MIRName)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model.MenuRecipeList)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MIRName)
-            </td>
-            <td>
-                <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@item.MIRID" style="border-radius:5px; padding:5px;"></button>
-                <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@item.MIRID" style="border-radius:5px; padding:5px;"></button> 
-                <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@item.MIRID" style="border-radius:5px; padding:5px;"></button>
-            </td>
-        </tr>
-    }
+<div class="form-group">
+    <div class="col-md-4" style="border:solid green 2px; min-height:350px;">
+        <h2 align="center"><strong>Pasta</strong></h2>
+        <div class="scrollbarmr" id="style-1">
+            @foreach (var pasta in Model.MenuRecipeList.Where(x => x.MIRCategory == "Pasta"))
+            {
+                <div class="col-md-7">
+                    @Html.DisplayFor(modelItem => pasta.MIRName)
+                </div>
+                <div class="col-md-5">
+                    <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@pasta.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@pasta.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@pasta.MIRID" style="border-radius:5px; padding:5px;"></button>
+                </div>
+            }
+        </div>
+    </div>
 
-</table>
+    <div class="col-md-4" style="border:solid green 2px; min-height:350px;">
+        <h2 align="center"><strong>Drinks</strong></h2>
+        <div class="scrollbarmr" id="style-1">
+            @foreach (var drinks in Model.MenuRecipeList.Where(x => x.MIRCategory == "Drinks"))
+            {
+                <div class="col-md-7">
+                    @Html.DisplayFor(modelItem => drinks.MIRName)
+                </div>
+                <div class="col-md-5">
+                    <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@drinks.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@drinks.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@drinks.MIRID" style="border-radius:5px; padding:5px;"></button>
+                </div>
+             }
+        </div>
+    </div>
+
+    <div class="col-md-4" style="border:solid green 2px; min-height:350px;">
+        <h2 align="center"><strong>Sandwiches</strong></h2>
+        <div class="scrollbarmr" id="style-1">
+            @foreach (var sw in Model.MenuRecipeList.Where(x => x.MIRCategory == "Sandwiches"))
+            {
+                <div class="col-md-7">
+                    @Html.DisplayFor(modelItem => sw.MIRName)
+                </div>
+                <div class="col-md-5">
+                    <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@sw.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@sw.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@sw.MIRID" style="border-radius:5px; padding:5px;"></button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-md-4" style="border:solid green 2px; min-height:350px;">
+        <h2 align="center"><strong>Pika Pika</strong></h2>
+        <div class="scrollbarmr" id="style-1">
+            @foreach (var pika in Model.MenuRecipeList.Where(x => x.MIRCategory == "Pika Pika"))
+            {
+                <div class="col-md-7">
+                    @Html.DisplayFor(modelItem => pika.MIRName)
+                </div>
+                <div class="col-md-5">
+                    <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@pika.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@pika.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@pika.MIRID" style="border-radius:5px; padding:5px;"></button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-4" style="border:solid green 2px; min-height:350px;">
+        <h2 align="center"><strong>Dessert</strong></h2>
+        <div class="scrollbarmr" id="style-1">
+            @foreach (var dessert in Model.MenuRecipeList.Where(x => x.MIRCategory == "Dessert"))
+            {
+                <div class="col-md-7">
+                    @Html.DisplayFor(modelItem => dessert.MIRName)
+                </div>
+                <div class="col-md-5">
+                    <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@dessert.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@dessert.MIRID" style="border-radius:5px; padding:5px;"></button>
+                    <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@dessert.MIRID" style="border-radius:5px; padding:5px;"></button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-4" style="border:solid green 2px; min-height:350px;">
+        <h2 align="center"><strong>Rice Meal</strong></h2>
+        <div class="scrollbarmr" id="style-1">
+            @foreach (var rm in Model.MenuRecipeList.Where(x => x.MIRCategory == "Rice Meal"))
+        {
+            <div class="col-md-7">
+                @Html.DisplayFor(modelItem => rm.MIRName)
+            </div>
+            <div class="col-md-5">
+                <button href="javascript:void(0);" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@rm.MIRID" style="border-radius:5px; padding:5px;"></button>
+                <button href="javascript:void(0);" class="anchorDetail glyphicon glyphicon-info-sign btn-info" data-id="@rm.MIRID" style="border-radius:5px; padding:5px;"></button>
+                <button href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@rm.MIRID" style="border-radius:5px; padding:5px;"></button>
+            </div>
+        }
+        </div>
+    </div>
+</div>
+
 <!--Edit Modal-->
 <div id='myModalEdit' class='modal fade'>
     <div class="modal-dialog">
@@ -163,7 +274,7 @@
                 $('#myModalDelete').modal('hide');
             });
         });
-                    //End of Delete Modal
+                            //End of Delete Modal
     </script>
 
 }
