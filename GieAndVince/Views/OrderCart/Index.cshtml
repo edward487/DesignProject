@@ -1,0 +1,207 @@
+﻿@model GieAndVince.Models.ViewModel.OrderCartViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .btn-category {
+        min-height:40px;
+        min-width: 125px;
+    }
+    .btn-items {
+        min-height:60px;
+        min-width:125px;
+    }
+    .lh-20 {
+        line-height: 15px;
+    }
+</style>
+<h2 align="center"><strong>Transaction</strong></h2>
+<div class="lh-50">&nbsp;</div>
+
+<div class="col-md-8">
+    <div class="form-group">
+        <div class="col-md-2">
+            <div class="lh-20">&nbsp;</div>
+            <button class="btn btn-warning btn-category">Pasta</button>
+            @foreach (var pasta in Model.MenuRecipeList.Where(x => x.MIRCategory == "Pasta"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@pasta.MIRID" value="@Html.DisplayFor(o => pasta.MIRName)">@Html.DisplayFor(o => pasta.MIRName)</button>
+            }
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning btn-category">Drinks</button>
+            @foreach (var drinks in Model.MenuRecipeList.Where(x => x.MIRCategory == "Drinks"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@drinks.MIRID" value="@Html.DisplayFor(o => drinks.MIRName)">@Html.DisplayFor(o => drinks.MIRName)</button>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning btn-category">Sandwiches</button>
+            @foreach (var sw in Model.MenuRecipeList.Where(x => x.MIRCategory == "Sandwiches"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@sw.MIRID" value="@Html.DisplayFor(o => sw.MIRName)">@Html.DisplayFor(o => sw.MIRName)</button>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning btn-category">Pika Pika</button>
+            @foreach (var pk in Model.MenuRecipeList.Where(x => x.MIRCategory == "Pika Pika"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@pk.MIRID" value="@Html.DisplayFor(o => pk.MIRName)">@Html.DisplayFor(o => pk.MIRName)</button>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning btn-category">Dessert</button>
+            @foreach (var dessert in Model.MenuRecipeList.Where(x => x.MIRCategory == "Dessert"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@dessert.MIRID" value="@Html.DisplayFor(o => dessert.MIRName)">@Html.DisplayFor(o => dessert.MIRName)</button>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning btn-category">Rice Meal</button>
+            @foreach (var rm in Model.MenuRecipeList.Where(x => x.MIRCategory == "Rice Meal"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@rm.MIRID" value="@Html.DisplayFor(o => rm.MIRName)">@Html.DisplayFor(o => rm.MIRName)</button>
+            }
+        </div>
+    </div>
+
+</div>
+<div class="col-md-4">
+    <h2>Orders</h2>
+
+    <p>
+        @Html.ActionLink("Purchase >>", "Payment", "Order")
+    </p>
+    <table class="table">
+            <tr>
+                <th>
+                    Order Name:
+                </th>
+                <th>
+                    Quantity:
+                </th>
+                <th>
+                    Price (each): 
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.OrderItems)
+             {
+            <tr id="row-@item.RecordID" class="appendOrder">
+                <td>
+                    @Html.DisplayFor(o => item.MIRName)
+                </td>
+                <td id="item-count-@item.RecordID" class="order-status">
+                    @Html.DisplayFor(o => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(o => item.MIRPrice)
+                </td>
+                <td>
+                    <a href="#" class="RemoveLink close" data-id="@item.RecordID">x</a>
+                </td>
+            </tr>
+            }     
+     
+    </table>
+    <div class="form-horizontal">
+        <div class="container">
+            <div class="form-group">
+                <label class="col-md-6">Subtotal:</label>
+                <div class="col-md-6">
+                    @Model.OrderTotal
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-6">Items:</label>
+                <div class="col-md-6">
+                    @Model.OrderCount
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        //Adding item to cart
+        var buttonUrl = '/OrderCart/AddToTransaction';
+
+        $(".buttonItem").click(function () {
+            //debugger;
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: buttonUrl,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function (data) {
+                    $('.appendOrders').append(data);
+                },
+                error: function (msg) { }
+            })
+        });
+
+                //End adding item to cart
+        $(function () {
+            $(".RemoveLink").click(function () {
+                //Get the id from the link
+                var recordToDelete = $(this).attr("data-id");
+
+                if (recordToDelete != '') {
+                    //Perform tha ajax post
+                    $.post("/OrderCart/RemoveFromTransaction", { "id": recordToDelete },
+                        function (data) {
+                            //Successful request get here
+                            //Update the page elements
+                            if (data.ItemCount == 0) {
+                                $('#row-' + data.DeleteId).text(data.ItemCount);
+                            }
+
+                            $('#order-total').text(data.OrderTotal);
+                            $('#update-message').text(data.Message);
+                            $('#order-status').text('Order(' + data.OrderCount + ')');
+                        });
+                }
+            });
+        });
+
+        function handleUpdate() {
+            //Load ANd deserialize the returned JSON data
+            var json = context.get_data();
+            var data = Sys.Serialization.JavaScriptSerializer.deserialize(json);
+
+            //Update the page elements
+            if (data.ItemCount == 0) {
+                $('#row-' + data.DeleteId).text(data.ItemCount);
+            }
+
+            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+        }
+
+        $('#order-total').text(data.OrderTotal);
+        $('#update-message').text(data.Message);
+        $('#order-status').text('Order(' + data.OrderCount + ')');
+       
+    </script>
+}

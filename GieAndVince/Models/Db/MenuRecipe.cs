@@ -16,6 +16,7 @@ namespace GieAndVince.Models.Db
 
     public partial class MenuRecipe
     {
+        [Key]
         public int MIRID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DisplayName("Name")]

@@ -25,8 +25,6 @@ namespace GieAndVince.Controllers
             });
         }
         // POST: MenuRecipes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CombinedModels m)
@@ -58,8 +56,6 @@ namespace GieAndVince.Controllers
         }
 
         // POST: MenuRecipes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(MenuRecipe menuRecipe)
@@ -78,8 +74,6 @@ namespace GieAndVince.Controllers
         {
             //Generate two models in a single view
             var cviewModel = new CombinedModels();
-            cviewModel.RawItemModel = db.RawItems.ToList();
-            cviewModel.MenuRecipeModel = new MenuRecipe();
             cviewModel.MenuRecipeList = db.MenuRecipes.ToList();
             return View(cviewModel);
         }

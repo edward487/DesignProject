@@ -153,11 +153,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuRecipesController.cs" />
+    <Compile Include="Controllers\OrderCartController.cs" />
     <Compile Include="Controllers\RawItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Db\Account.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Db\Cart.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Db\GVDB.Context.cs">
@@ -178,12 +182,24 @@
     <Compile Include="Models\Db\MenuRecipe.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Db\Order.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Db\OrderDetail.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Db\RawItem.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\ViewModel\AccountViewModel.cs" />
+    <Compile Include="Models\ViewModel\CartViewModel.cs" />
     <Compile Include="Models\ViewModel\MenuRecipeViewModel.cs" />
     <Compile Include="Models\ViewModel\CombinedModels.cs" />
+    <Compile Include="Models\ViewModel\OrderCartRemoveViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderCartViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderDetailViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -338,9 +354,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\RawItems\Create.cshtml" />
@@ -353,6 +366,9 @@
     <Content Include="Views\MenuRecipes\Index.cshtml" />
     <Content Include="Views\MenuRecipes\CreateList.cshtml" />
     <Content Include="Views\MenuRecipes\Edit.cshtml" />
+    <Content Include="Views\OrderCart\Index.cshtml" />
+    <Content Include="Views\OrderCart\Orders.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />

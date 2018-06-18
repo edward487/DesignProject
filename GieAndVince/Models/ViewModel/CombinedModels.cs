@@ -13,5 +13,7 @@ namespace GieAndVince.Models.ViewModel
         public List<RawItem> RawItemModel { get; set; }
         public MenuRecipe MenuRecipeModel { get; set; }
         public List<MenuRecipe> MenuRecipeList { get; set; }
+        public List<Order> OrderList { get; set; }
+        public Order OrderModel { get; set; }
     }
 }

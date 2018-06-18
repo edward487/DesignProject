@@ -1,0 +1,108 @@
+﻿@model IEnumerable<GieAndVince.Models.Db.MenuRecipe>
+
+@{
+    ViewBag.Title = "TransactionList";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    div.container {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+</style>
+<h2 align="center"><strong>Transaction</strong></h2>
+
+<div class="col-md-8">
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning" style="padding: 10px 55px 10px 55px;">Pasta</button>
+            @foreach (var pasta in Model.Where(x => x.MIRCategory == "Pasta"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-default" data-id="@pasta.MIRID">@Html.DisplayFor(o => pasta.MIRName)</button>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning" style="padding: 10px 55px 10px 55px;">Drinks</button>
+            @foreach (var drinks in Model.Where(x => x.MIRCategory == "Drinks"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-default" data-id="@drinks.MIRID">@Html.DisplayFor(o => drinks.MIRName)</button>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning" style="padding: 10px 55px 10px 55px;">Sandwiches</button>
+            @foreach (var sw in Model.Where(x => x.MIRCategory == "Sandwiches"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-default" data-id="@sw.MIRID">@Html.DisplayFor(o => sw.MIRName)</button>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning" style="padding: 10px 55px 10px 55px;">Pika Pika</button>
+            @foreach (var pk in Model.Where(x => x.MIRCategory == "Pika Pika"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-default" data-id="@pk.MIRID">@Html.DisplayFor(o => pk.MIRName)</button>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning" style="padding: 10px 55px 10px 55px;">Dessert</button>
+            @foreach (var dessert in Model.Where(x => x.MIRCategory == "Dessert"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-default" data-id="@dessert.MIRID">@Html.DisplayFor(o => dessert.MIRName)</button>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-warning" style="padding: 10px 55px 10px 55px;">Rice Meal</button>
+            @foreach (var rm in Model.Where(x => x.MIRCategory == "Rice Meal"))
+            {
+                <button href="javascript:void(0);" class="buttonItem btn-default" data-id="@rm.MIRID">@Html.DisplayFor(o => rm.MIRName)</button>
+            }
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        //Adding item to cart
+        var buttonUrl = '/OrderCart/AddToTransaction';
+        $(function () {
+            $(".buttonItem").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: buttonUrl,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                       
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+        });
+        //End adding item to cart
+    </script>
+}
+
+

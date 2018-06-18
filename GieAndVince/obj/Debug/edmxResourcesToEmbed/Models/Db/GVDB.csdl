@@ -3,7 +3,10 @@
   <EntityContainer Name="GVDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accounts" EntityType="GVDBModel.Account" />
     <EntitySet Name="RawItems" EntityType="GVDBModel.RawItem" />
+    <EntitySet Name="OrderDetails" EntityType="GVDBModel.OrderDetail" />
     <EntitySet Name="MenuRecipes" EntityType="GVDBModel.MenuRecipe" />
+    <EntitySet Name="Carts" EntityType="GVDBModel.Cart" />
+    <EntitySet Name="Orders" EntityType="GVDBModel.Order" />
   </EntityContainer>
   <EntityType Name="Account">
     <Key>
@@ -25,15 +28,45 @@
     <Property Name="RIPrice" Type="Int32" />
     <Property Name="RIQuantity" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailID" />
+    </Key>
+    <Property Name="OrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="MIRID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
   <EntityType Name="MenuRecipe">
     <Key>
       <PropertyRef Name="MIRID" />
     </Key>
     <Property Name="MIRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="MIRName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="MIRPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="MIRPrice" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="MIRCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="MIRSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="MIRRecipe" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="RecordID" />
+    </Key>
+    <Property Name="RecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CartID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MIRID" Type="Int32" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MIRName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MIRPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderTotal" Type="Int32" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
 </Schema>

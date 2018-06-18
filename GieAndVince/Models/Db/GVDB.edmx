@@ -15,16 +15,46 @@
           <Property Name="Fullname" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="RecordID" />
+          </Key>
+          <Property Name="RecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MIRID" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="MIRName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MIRPrice" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="MenuRecipe">
           <Key>
             <PropertyRef Name="MIRID" />
           </Key>
           <Property Name="MIRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MIRName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="MIRPrice" Type="money" Nullable="false" />
+          <Property Name="MIRPrice" Type="money" />
           <Property Name="MIRCategory" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MIRSize" Type="varchar" MaxLength="50" />
           <Property Name="MIRRecipe" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderTotal" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="MIRID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="RawItem">
           <Key>
@@ -38,7 +68,10 @@
         </EntityType>
         <EntityContainer Name="StoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuRecipe" EntityType="Self.MenuRecipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RawItem" EntityType="Self.RawItem" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -48,8 +81,11 @@
         <EntityContainer Name="GVDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="GVDBModel.Account" />
           <EntitySet Name="RawItems" EntityType="GVDBModel.RawItem" />
+          <EntitySet Name="OrderDetails" EntityType="GVDBModel.OrderDetail" />
           <EntitySet Name="MenuRecipes" EntityType="GVDBModel.MenuRecipe" />
-        </EntityContainer>
+          <EntitySet Name="Carts" EntityType="GVDBModel.Cart" />
+          <EntitySet Name="Orders" EntityType="GVDBModel.Order" />
+          </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="UserID" />
@@ -70,18 +106,48 @@
           <Property Name="RIPrice" Type="Int32" />
           <Property Name="RIQuantity" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="MIRID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
         <EntityType Name="MenuRecipe">
           <Key>
             <PropertyRef Name="MIRID" />
           </Key>
           <Property Name="MIRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MIRName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="MIRPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="MIRPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="MIRCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MIRSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MIRRecipe" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="RecordID" />
+          </Key>
+          <Property Name="RecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MIRID" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MIRName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MIRPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderTotal" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -109,6 +175,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="GVDBModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MIRID" ColumnName="MIRID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MenuRecipes">
             <EntityTypeMapping TypeName="GVDBModel.MenuRecipe">
               <MappingFragment StoreEntitySet="MenuRecipe">
@@ -121,7 +198,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="GVDBModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="MIRPrice" ColumnName="MIRPrice" />
+                <ScalarProperty Name="MIRName" ColumnName="MIRName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="MIRID" ColumnName="MIRID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="RecordID" ColumnName="RecordID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="GVDBModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderTotal" ColumnName="OrderTotal" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

@@ -27,6 +27,9 @@ namespace GieAndVince.Models.Db
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<RawItem> RawItems { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<MenuRecipe> MenuRecipes { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }
