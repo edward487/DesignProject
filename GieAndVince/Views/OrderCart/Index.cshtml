@@ -89,6 +89,7 @@
         @Html.ActionLink("Purchase >>", "Payment", "Order")
     </p>
     <table class="table">
+        <thead>
             <tr>
                 <th>
                     Order Name:
@@ -97,40 +98,42 @@
                     Quantity:
                 </th>
                 <th>
-                    Price (each): 
+                    Price (each):
                 </th>
                 <th></th>
             </tr>
+        </thead>
+        <tbody id="tbl-body">
             @foreach (var item in Model.OrderItems)
-             {
-            <tr id="row-@item.RecordID" class="appendOrder">
-                <td>
-                    @Html.DisplayFor(o => item.MIRName)
-                </td>
-                <td id="item-count-@item.RecordID" class="order-status">
-                    @Html.DisplayFor(o => item.Count)
-                </td>
-                <td>
-                    @Html.DisplayFor(o => item.MIRPrice)
-                </td>
-                <td>
-                    <a href="#" class="RemoveLink close" data-id="@item.RecordID">x</a>
-                </td>
-            </tr>
-            }     
-     
+            {
+                <tr id="row-@item.RecordID" class="appendOrder" data-menu-id-row="@item.MIRID">
+                    <td>
+                        @Html.DisplayFor(o => item.MIRName)
+                    </td>
+                    <td data-menu-id="@item.MIRID" id="item-count-@item.RecordID" class="order-status">
+                        @Html.DisplayFor(o => item.Count)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(o => item.MIRPrice)
+                    </td>
+                    <td>
+                        <a href="#" class="RemoveLink close" data-id="@item.RecordID" data-price="@item.MIRPrice" onclick="deductQuantity(this)">x</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
     <div class="form-horizontal">
         <div class="container">
             <div class="form-group">
                 <label class="col-md-6">Subtotal:</label>
-                <div class="col-md-6">
+                <div class="col-md-6" id="total-price">
                     @Model.OrderTotal
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-6">Items:</label>
-                <div class="col-md-6">
+                <div class="col-md-6" id="item-count">
                     @Model.OrderCount
                 </div>
             </div>
@@ -147,7 +150,7 @@
         $(".buttonItem").click(function () {
             //debugger;
             var $buttonClicked = $(this);
-            var id = $buttonClicked.attr('data-id');
+            var id = $buttonClicked.data('id');
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
                 type: "GET",
@@ -156,35 +159,63 @@
                 data: { "Id": id },
                 datatype: "json",
                 success: function (data) {
-                    $('.appendOrders').append(data);
+
+                    if ($("tr[data-menu-id-row='"+id+"']").html() != undefined) {
+                        $('.appendOrders').append(data);
+                        $("td[data-menu-id='" + id + "']").text($("td[data-menu-id='" + id + "']").text() * 1 + 1);
+                    }
+                    else {
+                        createNewRow(JSON.parse(data));
+                    }
+                    $("#item-count").text($("#item-count").text() * 1 + 1);
+                    $("#total-price").text(($("#total-price").text()*1) + (JSON.parse(data).Price*1));
                 },
                 error: function (msg) { }
             })
         });
 
+        function createNewRow(data) {
+
+            var row = "<tr id=\"row-" + data.OrderId + "\" class=\"appendOrder\" data-menu-id-row=\"" + data.Id + "\" > \
+                <td>" + data.Name + "</td> \
+                <td data-menu-id=\"" + data.Id + "\" id=\"item-count-" + data.OrderId + "\" class=\"order-status\">1</td> \
+                <td>" + data.Price + "</td> \
+                <td><a href=\"#\" class=\"RemoveLink close\" data-id=\"" + data.OrderId + "\" data-price=\"" + data.Price + "\" onclick=\"deductQuantity(this)\">x</a></td> \
+            </tr >";
+
+            $("#tbl-body").append(row);
+
+        }
+
                 //End adding item to cart
-        $(function () {
-            $(".RemoveLink").click(function () {
-                //Get the id from the link
-                var recordToDelete = $(this).attr("data-id");
+        function deductQuantity(self) {
+            //Get the id from the link
+            var recordToDelete = $(self).data("id");
+            console.log("hello");
+            if (recordToDelete != '') {
+                //Perform tha ajax post
+                $.post("/OrderCart/RemoveFromTransaction", { "id": recordToDelete },
+                    function (data) {
+                        //Successful request get here
+                        //Update the page elements
+                        if (data.ItemCount == 0) {
+                            //$('#row-' + data.DeleteId).text(data.ItemCount);
+                            $('#row-' + data.DeleteId).remove();
+                        }
 
-                if (recordToDelete != '') {
-                    //Perform tha ajax post
-                    $.post("/OrderCart/RemoveFromTransaction", { "id": recordToDelete },
-                        function (data) {
-                            //Successful request get here
-                            //Update the page elements
-                            if (data.ItemCount == 0) {
-                                $('#row-' + data.DeleteId).text(data.ItemCount);
-                            }
+                        $('#order-total').text(data.OrderTotal);
+                        $('#update-message').text(data.Message);
+                        $('#order-status').text('Order(' + data.OrderCount + ')');
 
-                            $('#order-total').text(data.OrderTotal);
-                            $('#update-message').text(data.Message);
-                            $('#order-status').text('Order(' + data.OrderCount + ')');
-                        });
-                }
-            });
-        });
+                        $("#total-price").text(($("#total-price").text() * 1) - ($(self).data("price") * 1));
+                        $("#item-count").text(($("#item-count").text() * 1) - 1);
+
+                        if ($("#item-count-" + recordToDelete).text() * 1 > 1) {
+                            $("#item-count-" + recordToDelete).text($("#item-count-" + recordToDelete).text() * 1 - 1);
+                        }
+                    });
+            }
+        }
 
         function handleUpdate() {
             //Load ANd deserialize the returned JSON data
@@ -197,11 +228,12 @@
             }
 
             $('#item-count-' + data.DeleteId).text(data.ItemCount);
-        }
 
-        $('#order-total').text(data.OrderTotal);
-        $('#update-message').text(data.Message);
-        $('#order-status').text('Order(' + data.OrderCount + ')');
+            $('#order-total').text(data.OrderTotal);
+            $('#update-message').text(data.Message);
+
+            $('#order-status').text('Order(' + data.OrderCount + ')');
+        }
        
     </script>
 }

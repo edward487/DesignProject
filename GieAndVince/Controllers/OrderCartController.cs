@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using GieAndVince.Models;
 using GieAndVince.Models.Db;
 using GieAndVince.Models.ViewModel;
+using System.Web.Services;
 
 namespace GieAndVince.Controllers
 {
@@ -34,7 +35,7 @@ namespace GieAndVince.Controllers
         }
 
         //Get ORders/5
-        public ActionResult AddToTransaction(int id)
+        public string AddToTransaction(int id)
         {
 
             //Retrieve the menurecipe from the database
@@ -45,7 +46,19 @@ namespace GieAndVince.Controllers
 
             order.AddToTransaction(addedMenuRecipe);
 
-            return RedirectToAction("Index");
+
+            int orderId = 0;
+
+            if (db.Carts.Any())
+            {
+                orderId = db.Carts.OrderByDescending(o => o.RecordID).First().RecordID;
+            }
+
+            //return RedirectToAction("Index");
+            string price = Math.Round(addedMenuRecipe.MIRPrice, 2).ToString("F");
+            string menuInfo = string.Format("{{ \"Id\":\"{0}\",\"OrderId\":{1},\"Name\":\"{2}\",\"Price\":\"{3}\" }}", addedMenuRecipe.MIRID, orderId, addedMenuRecipe.MIRName, price);
+
+            return menuInfo;
         }
 
         [HttpPost]
