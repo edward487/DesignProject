@@ -7,6 +7,11 @@
     <EntitySet Name="MenuRecipes" EntityType="GVDBModel.MenuRecipe" />
     <EntitySet Name="Carts" EntityType="GVDBModel.Cart" />
     <EntitySet Name="Orders" EntityType="GVDBModel.Order" />
+    <EntitySet Name="SalesManagements" EntityType="GVDBModel.SalesManagement" />
+    <EntitySet Name="SalesperDays" EntityType="GVDBModel.SalesperDay" />
+    <EntitySet Name="SalesperMonths" EntityType="GVDBModel.SalesperMonth" />
+    <EntitySet Name="SalesperWeeks" EntityType="GVDBModel.SalesperWeek" />
+    <EntitySet Name="SalesperYears" EntityType="GVDBModel.SalesperYear" />
   </EntityContainer>
   <EntityType Name="Account">
     <Key>
@@ -68,5 +73,49 @@
     <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="OrderTotal" Type="Int32" Nullable="false" />
     <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="SalesManagement">
+    <Key>
+      <PropertyRef Name="SalesManagementId" />
+    </Key>
+    <Property Name="SalesManagementId" Type="Int32" Nullable="false" />
+    <Property Name="SPDayId" Type="Int32" Nullable="false" />
+    <Property Name="SPWeekId" Type="Int32" Nullable="false" />
+    <Property Name="SPMonthId" Type="Int32" Nullable="false" />
+    <Property Name="SPYearId" Type="Int32" Nullable="false" />
+    <Property Name="CalendarDateType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TotalSales" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="SalesperDay">
+    <Key>
+      <PropertyRef Name="SPDayId" />
+    </Key>
+    <Property Name="SPDayId" Type="Int32" Nullable="false" />
+    <Property Name="SPDayDate" Type="Int32" Nullable="false" />
+    <Property Name="SPDaySales" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="SalesperMonth">
+    <Key>
+      <PropertyRef Name="SPMonthId" />
+    </Key>
+    <Property Name="SPMonthId" Type="Int32" Nullable="false" />
+    <Property Name="SPMonthDate" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SPMonthSales" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="SalesperWeek">
+    <Key>
+      <PropertyRef Name="SPWeekId" />
+    </Key>
+    <Property Name="SPWeekId" Type="Int32" Nullable="false" />
+    <Property Name="SPWeekDate" Type="Int32" Nullable="false" />
+    <Property Name="SPWeekSales" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="SalesperYear">
+    <Key>
+      <PropertyRef Name="SPYearId" />
+    </Key>
+    <Property Name="SPYearId" Type="Int32" Nullable="false" />
+    <Property Name="SPYearDate" Type="Int32" Nullable="false" />
+    <Property Name="SPYearSales" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
   </EntityType>
 </Schema>

@@ -31,5 +31,10 @@ namespace GieAndVince.Models.Db
         public virtual DbSet<MenuRecipe> MenuRecipes { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<SalesManagement> SalesManagements { get; set; }
+        public virtual DbSet<SalesperDay> SalesperDays { get; set; }
+        public virtual DbSet<SalesperMonth> SalesperMonths { get; set; }
+        public virtual DbSet<SalesperWeek> SalesperWeeks { get; set; }
+        public virtual DbSet<SalesperYear> SalesperYears { get; set; }
     }
 }

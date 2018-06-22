@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GieAndVince.Models.Db.SalesManagement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<button class="btn-success" onclick="">Sort by Day</button>
+<button class="btn-success" onclick="">Sort by Week</button>
+<button class="btn-success" onclick="">Sort by Month</button>
+<button class="btn-success" onclick="">Sort by Year</button>
+<div class="lh-50">&nbsp;</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CalendarDateType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSales)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CalendarDateType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalSales)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.SalesManagementId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SalesManagementId })
+        </td>
+    </tr>
+}
+
+</table>

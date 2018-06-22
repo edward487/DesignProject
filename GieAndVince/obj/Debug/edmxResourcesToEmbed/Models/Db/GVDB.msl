@@ -68,5 +68,54 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SalesManagements">
+      <EntityTypeMapping TypeName="GVDBModel.SalesManagement">
+        <MappingFragment StoreEntitySet="SalesManagement">
+          <ScalarProperty Name="TotalSales" ColumnName="TotalSales" />
+          <ScalarProperty Name="CalendarDateType" ColumnName="CalendarDateType" />
+          <ScalarProperty Name="SPYearId" ColumnName="SPYearId" />
+          <ScalarProperty Name="SPMonthId" ColumnName="SPMonthId" />
+          <ScalarProperty Name="SPWeekId" ColumnName="SPWeekId" />
+          <ScalarProperty Name="SPDayId" ColumnName="SPDayId" />
+          <ScalarProperty Name="SalesManagementId" ColumnName="SalesManagementId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesperDays">
+      <EntityTypeMapping TypeName="GVDBModel.SalesperDay">
+        <MappingFragment StoreEntitySet="SalesperDay">
+          <ScalarProperty Name="SPDaySales" ColumnName="SPDaySales" />
+          <ScalarProperty Name="SPDayDate" ColumnName="SPDayDate" />
+          <ScalarProperty Name="SPDayId" ColumnName="SPDayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesperMonths">
+      <EntityTypeMapping TypeName="GVDBModel.SalesperMonth">
+        <MappingFragment StoreEntitySet="SalesperMonth">
+          <ScalarProperty Name="SPMonthSales" ColumnName="SPMonthSales" />
+          <ScalarProperty Name="SPMonthDate" ColumnName="SPMonthDate" />
+          <ScalarProperty Name="SPMonthId" ColumnName="SPMonthId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesperWeeks">
+      <EntityTypeMapping TypeName="GVDBModel.SalesperWeek">
+        <MappingFragment StoreEntitySet="SalesperWeek">
+          <ScalarProperty Name="SPWeekSales" ColumnName="SPWeekSales" />
+          <ScalarProperty Name="SPWeekDate" ColumnName="SPWeekDate" />
+          <ScalarProperty Name="SPWeekId" ColumnName="SPWeekId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesperYears">
+      <EntityTypeMapping TypeName="GVDBModel.SalesperYear">
+        <MappingFragment StoreEntitySet="SalesperYear">
+          <ScalarProperty Name="SPYearSales" ColumnName="SPYearSales" />
+          <ScalarProperty Name="SPYearDate" ColumnName="SPYearDate" />
+          <ScalarProperty Name="SPYearId" ColumnName="SPYearId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

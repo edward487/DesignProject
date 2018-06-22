@@ -155,6 +155,7 @@
     <Compile Include="Controllers\MenuRecipesController.cs" />
     <Compile Include="Controllers\OrderCartController.cs" />
     <Compile Include="Controllers\RawItemsController.cs" />
+    <Compile Include="Controllers\SalesManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,6 +190,21 @@
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Db\RawItem.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Db\SalesManagement.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Db\SalesperDay.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Db\SalesperMonth.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Db\SalesperWeek.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Db\SalesperYear.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transaction.cs" />
@@ -369,6 +385,7 @@
     <Content Include="Views\OrderCart\Index.cshtml" />
     <Content Include="Views\OrderCart\Orders.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\SalesManagement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />
