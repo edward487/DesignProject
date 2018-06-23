@@ -386,6 +386,7 @@
     <Content Include="Views\OrderCart\Orders.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SalesManagement\Index.cshtml" />
+    <Content Include="Views\Account\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />

@@ -1,0 +1,111 @@
+﻿@model GieAndVince.Models.ViewModel.AccountViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 align="center">Users</h2>
+<div class="lh-50">&nbsp;</div>
+<p class="col-md-4" style="font-size:20px;">
+    <span class="glyphicon glyphicon-plus"></span>
+    <a href="Register" class="anchorCreate text-success">Add New User</a>
+</p>
+
+<div class="scrollbar" id="style-1">
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Username
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Accounts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fullname)
+                </td>
+                <td>
+                    <a href="Register?id=@item.UserID" class="anchorEdit glyphicon glyphicon-edit btn-warning" data-id="@item.UserID" style="border-radius:5px; padding:5px;"></a>
+                    <a href="javascript:void(0);" class="anchorDelete glyphicon glyphicon-trash btn-danger" data-id="@item.UserID" style="border-radius:5px; padding:5px;"></a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<!--Create Modal-->
+<div id='myModalCreate' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentCreate'></div>
+        </div>
+    </div>
+</div>
+<!--End Create Modal-->
+<!--Edit Modal-->
+<div id='myModalEdit' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentEdit'></div>
+        </div>
+    </div>
+</div>
+<!--End Edit Modal-->
+<!--Details Modal-->
+<div id='myModalDetails' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentDetails'></div>
+        </div>
+    </div>
+</div>
+<!--End Details Modal-->
+<!--Delete Modal-->
+<div id='myModalDelete' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContentDelete'></div>
+        </div>
+    </div>
+</div>
+<!--End Delete Modal-->
+@section scripts
+{
+    <script>
+        
+        //Delete Modal
+        var TeamDeleteBackURL = '/RawItems/Delete';
+        $(function () {
+            $(".anchorDelete").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDeleteBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        // debugger;
+                        $('#myModalContentDelete').html(data);
+                        $('#myModalDelete').modal(options);
+                        $('#myModalDelete').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModalDelete').modal('hide');
+            });
+        });
+        //End of Delete Modal
+    </script>
+}

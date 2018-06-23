@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,9 +11,26 @@ namespace GieAndVince.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        public ActionResult Register()
+        public ActionResult Register(int? id)
         {
-            return View();
+            if (id == null)
+                return View();
+
+            AccountViewModel userModel = new AccountViewModel();
+
+            using (GVDBEntities db = new GVDBEntities())
+            {
+                Account acc = db.Accounts.FirstOrDefault(o => o.UserID == id.Value);
+
+                if (acc == null)
+                    return View();
+
+                userModel.FullName = acc.Fullname;
+                userModel.IsAdmin = acc.IsAdmin;
+                userModel.UserID = acc.UserID;
+                userModel.Username = acc.Username;
+            }
+            return View(userModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -26,16 +43,38 @@ namespace GieAndVince.Controllers
                 {
                     try
                     {
-                        Account user = new Account();
-                        user.Username = userModel.Username;
-                        user.Password = userModel.Password;
-                        user.Fullname = userModel.FullName;
-                        user.IsAdmin = userModel.IsAdmin;
-                        //Add to Database Users then save
-                        db.Accounts.Add(user);
-                        db.SaveChanges();
-                        ModelState.Clear();
-                        ViewBag.SuccessMessage = "Registration Successful";
+                        if (userModel.UserID == 0)
+                        {
+                            Account user = new Account();
+                            user.Username = userModel.Username;
+                            user.Password = userModel.Password;
+                            user.Fullname = userModel.FullName;
+                            user.IsAdmin = userModel.IsAdmin;
+                            //Add to Database Users then save
+                            db.Accounts.Add(user);
+                            db.SaveChanges();
+                            ModelState.Clear();
+                            ViewBag.SuccessMessage = "Registration Successful";
+                        }
+                        else
+                        {
+                            Account user = db.Accounts.FirstOrDefault(o => o.UserID == userModel.UserID);
+                            user.Username = userModel.Username;
+                            user.Fullname = userModel.FullName;
+                            user.IsAdmin = userModel.IsAdmin;
+                            if (userModel.CurrentPassword != string.Empty && userModel.CurrentPassword == user.Password)
+                            {
+                                user.Password = userModel.NewPassword;
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("CurrentPassword", "Wrong Password");
+                                return View(userModel);
+                            }
+                            db.SaveChanges();
+                            ModelState.Clear();
+                            ViewBag.SuccessMessage = "Update Successful";
+                        }
                     }
                     catch (Exception e)
                     {
@@ -45,6 +84,7 @@ namespace GieAndVince.Controllers
             }
             return View(userModel);
         }
+
         //Get Login
         public ActionResult Login()
         {
@@ -75,6 +115,18 @@ namespace GieAndVince.Controllers
             int userId = (int)Session["UserID"];
             Session.Abandon();
             return RedirectToAction("Login", "Account");
+        }
+        
+        [HttpGet]
+        public ActionResult List()
+        {
+            using (GVDBEntities db = new GVDBEntities())
+            {
+                var accountsVm = new AccountViewModel();
+                accountsVm.Accounts = db.Accounts.ToList();
+                return View(accountsVm);
+            }
+
         }
     }
 }
