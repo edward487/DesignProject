@@ -64,7 +64,11 @@
 <div id='myModalDelete' class='modal fade'>
     <div class="modal-dialog">
         <div class="modal-content">
-            <div id='myModalContentDelete'></div>
+            <input id="item-to-delete" type="hidden" />
+            <div class="btn-group">
+                <button class="btn-primary" id="btn-delete-yes">Delete</button>
+                <button class="btn-default" id="btn-delete-no" data-dismiss="modal">Cancel</button>
+            </div>
         </div>
     </div>
 </div>
@@ -79,32 +83,41 @@
             $(".anchorDelete").click(function () {
                 //debugger;
                 var $buttonClicked = $(this);
-                var id = $buttonClicked.attr('data-id');
+                var id = $buttonClicked.data('id');
+                $("#item-to-delete").val(id);
+                $("#myModalDelete").modal("show");
+            });
+
+            $("#btn-delete-yes").click(function () {
+
+                var id = $("#item-to-delete").val();
                 var options = { "backdrop": "static", keyboard: true };
                 $.ajax({
                     type: "GET",
-                    url: TeamDeleteBackURL,
+                    url: 'DeleteUser',
                     contentType: "application/json; charset=utf-8",
                     data: { "Id": id },
                     datatype: "json",
                     success: function (data) {
-                        // debugger;
-                        $('#myModalContentDelete').html(data);
-                        $('#myModalDelete').modal(options);
-                        $('#myModalDelete').modal('show');
-
+                        if (data === '')
+                            alert("Dynamic content load failed.");
+                        else {
+                            $('#myModalDelete').modal('hide');
+                            $("#item-to-delete").val('');
+                            $(".anchorDelete[data-id='" + id + "']").closest("tr").remove();
+                        }
                     },
                     error: function () {
                         alert("Dynamic content load failed.");
                     }
                 });
             });
-            //$("#closebtn").on('click',function(){
-            //    $('#myModal').modal('hide');
 
-            $("#closbtn").click(function () {
+            $("#btn-delete-no").click(function () {
+                $("#item-to-delete").val('');
                 $('#myModalDelete').modal('hide');
             });
+
         });
         //End of Delete Modal
     </script>

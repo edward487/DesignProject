@@ -62,14 +62,17 @@ namespace GieAndVince.Controllers
                             user.Username = userModel.Username;
                             user.Fullname = userModel.FullName;
                             user.IsAdmin = userModel.IsAdmin;
-                            if (userModel.CurrentPassword != string.Empty && userModel.CurrentPassword == user.Password)
+                            if (userModel.CurrentPassword != null)
                             {
-                                user.Password = userModel.NewPassword;
-                            }
-                            else
-                            {
-                                ModelState.AddModelError("CurrentPassword", "Wrong Password");
-                                return View(userModel);
+                                if (userModel.CurrentPassword == user.Password)
+                                {
+                                    user.Password = userModel.NewPassword;
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("CurrentPassword", "Wrong Password");
+                                    return View(userModel);
+                                }
                             }
                             db.SaveChanges();
                             ModelState.Clear();
@@ -127,6 +130,22 @@ namespace GieAndVince.Controllers
                 return View(accountsVm);
             }
 
+        }
+
+        public string DeleteUser(int Id)
+        {
+            using (GVDBEntities db = new GVDBEntities())
+            {
+                var account = db.Accounts.FirstOrDefault(o => o.UserID == Id);
+
+                if (account == null)
+                    return string.Empty;
+
+                db.Accounts.Remove(account);
+                db.SaveChanges();
+
+                return "1";
+            }
         }
     }
 }
