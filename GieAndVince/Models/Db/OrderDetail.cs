@@ -18,6 +18,6 @@ namespace GieAndVince.Models.Db
         public int OrderID { get; set; }
         public int MIRID { get; set; }
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
+        public double UnitPrice { get; set; }
     }
 }

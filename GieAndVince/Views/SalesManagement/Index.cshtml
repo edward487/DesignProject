@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GieAndVince.Models.Db.SalesManagement>
+﻿@model  GieAndVince.Models.ViewModel.SalesViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,35 +6,129 @@
 
 <h2>Index</h2>
 
-<button class="btn-success" onclick="">Sort by Day</button>
-<button class="btn-success" onclick="">Sort by Week</button>
-<button class="btn-success" onclick="">Sort by Month</button>
-<button class="btn-success" onclick="">Sort by Year</button>
+<a href="Index?f=d" class="btn btn-success" onclick="">Sort by Day</a>
+<a href="Index?f=w" class="btn btn-success" onclick="">Sort by Week</a>
+<a href="Index?f=m" class="btn btn-success" onclick="">Sort by Month</a>
+<a href="Index?f=y" class="btn btn-success" onclick="">Sort by Year</a>
 <div class="lh-50">&nbsp;</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CalendarDateType)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalSales)
+            Total
         </th>
-        <th></th>
+        @if (Model.filter == "d")
+        {
+            <th></th>
+        }
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.sales) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CalendarDateType)
+            @if (Model.filter == "d")
+            {
+                @item.Date.ToString("hh:mm tt")
+            }
+            else if (Model.filter == "w")
+            {
+                @:Week @Model.week, @Model.date.ToString("MMM, yyyy")
+            }
+            else if (Model.filter == "m")
+            {
+                @Model.date.ToString("MMM, yyyy")
+            }
+            else if (Model.filter == "y")
+            {
+                @Model.date.ToString("yyyy")
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TotalSales)
         </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.SalesManagementId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SalesManagementId })
-        </td>
+
+        @if (Model.filter == "d")
+        {
+            <td>
+                <button data-id="@item.SalesManagementId" onclick="showDetails(this)">Details</button>
+                @*@Html.ActionLink("Delete", "Delete", new { id=item.SalesManagementId })*@
+            </td>
+        }
     </tr>
 }
 
 </table>
+
+<div id='salesDetails' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <table id="details">
+                <thead>
+                    <tr>
+                        <th>Menu</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr><td colspan="3">Time: <span id="time"></span></td></tr>
+                    <tr><td colspan="3">Total Price: <span id="total-price"></span></td></tr>
+                    <tr><td colspan="3">Cashier: <span id="cashier"></span></td></tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        
+    });
+
+    function showDetails(self) {
+
+        var id = $(self).data("id");
+        console.log(id);
+        $.ajax({
+            type: "GET",
+            url: "/SalesManagement/GetDetails",
+            data: { "Id": id },
+            success: function (data) {
+                console.log(data);
+                if (data != '0') {
+                    data = JSON.parse(data);
+                    buildDetails(data);
+                }
+            },
+            error: function (data) {
+                console.log("err");
+            }
+        })
+    }
+
+    function buildDetails(json)  {
+        console.log(json.length);
+        var html = "";
+
+        for (var i = 0; i < json.length - 1 ; i++) {
+            var row = json[i];
+            html += "<tr><td>" + row.name + "</td> \
+            <td>" + row.price + "</td> \
+            <td>" + row.quantity + "</td></tr>";
+        }
+
+
+        $("#details tbody").append(html);
+
+        $("#time").text(json[json.length - 1].time);
+        $("#total-price").text(json[json.length - 1].total);
+        $("#cashier").text(json[json.length - 1].cashier);
+
+        $("#salesDetails").modal("show");
+    }
+</script>

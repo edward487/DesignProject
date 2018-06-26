@@ -20,7 +20,7 @@
     <Property Name="Count" Type="int" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="MIRName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="MIRPrice" Type="money" Nullable="false" />
+    <Property Name="MIRPrice" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="MenuRecipe">
     <Key>
@@ -28,7 +28,7 @@
     </Key>
     <Property Name="MIRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MIRName" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="MIRPrice" Type="money" />
+    <Property Name="MIRPrice" Type="float" />
     <Property Name="MIRCategory" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="MIRSize" Type="varchar" MaxLength="50" />
     <Property Name="MIRRecipe" Type="varchar" MaxLength="500" Nullable="false" />
@@ -49,7 +49,17 @@
     <Property Name="OrderID" Type="int" Nullable="false" />
     <Property Name="MIRID" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
-    <Property Name="UnitPrice" Type="money" Nullable="false" />
+    <Property Name="UnitPrice" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="MenuPrice" Type="float" Nullable="false" />
+    <Property Name="MenuName" Type="varchar(max)" Nullable="false" />
+    <Property Name="SalesId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RawItem">
     <Key>
@@ -65,20 +75,17 @@
     <Key>
       <PropertyRef Name="SalesManagementId" />
     </Key>
-    <Property Name="SalesManagementId" Type="int" Nullable="false" />
-    <Property Name="SPDayId" Type="int" Nullable="false" />
-    <Property Name="SPWeekId" Type="int" Nullable="false" />
-    <Property Name="SPMonthId" Type="int" Nullable="false" />
-    <Property Name="SPYearId" Type="int" Nullable="false" />
-    <Property Name="CalendarDateType" Type="varchar(max)" Nullable="false" />
-    <Property Name="TotalSales" Type="money" Nullable="false" />
+    <Property Name="SalesManagementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="TotalSales" Type="float" Nullable="false" />
+    <Property Name="Cashier" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="SalesperDay">
     <Key>
       <PropertyRef Name="SPDayId" />
     </Key>
-    <Property Name="SPDayId" Type="int" Nullable="false" />
-    <Property Name="SPDayDate" Type="int" Nullable="false" />
+    <Property Name="SPDayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SPDayDate" Type="datetime" Nullable="false" />
     <Property Name="SPDaySales" Type="money" Nullable="false" />
   </EntityType>
   <EntityType Name="SalesperMonth">
@@ -105,17 +112,30 @@
     <Property Name="SPYearDate" Type="int" Nullable="false" />
     <Property Name="SPYearSales" Type="money" Nullable="false" />
   </EntityType>
+  <EntityType Name="TransactionItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="MenuPrice" Type="float" Nullable="false" />
+    <Property Name="MenuName" Type="varchar(max)" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="SalesId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityContainer Name="StoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenuRecipe" EntityType="Self.MenuRecipe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderTransaction" EntityType="Self.OrderTransaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RawItem" EntityType="Self.RawItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesManagement" EntityType="Self.SalesManagement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesperDay" EntityType="Self.SalesperDay" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesperMonth" EntityType="Self.SalesperMonth" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesperWeek" EntityType="Self.SalesperWeek" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesperYear" EntityType="Self.SalesperYear" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionItem" EntityType="Self.TransactionItem" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

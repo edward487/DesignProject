@@ -15,7 +15,7 @@ namespace GieAndVince.Models.Db
     public partial class SalesperDay
     {
         public int SPDayId { get; set; }
-        public int SPDayDate { get; set; }
+        public System.DateTime SPDayDate { get; set; }
         public decimal SPDaySales { get; set; }
     }
 }

@@ -12,25 +12,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RawItems">
-      <EntityTypeMapping TypeName="GVDBModel.RawItem">
-        <MappingFragment StoreEntitySet="RawItem">
-          <ScalarProperty Name="RIQuantity" ColumnName="RIQuantity" />
-          <ScalarProperty Name="RIPrice" ColumnName="RIPrice" />
-          <ScalarProperty Name="RIDescription" ColumnName="RIDescription" />
-          <ScalarProperty Name="RIName" ColumnName="RIName" />
-          <ScalarProperty Name="RawID" ColumnName="RawID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OrderDetails">
-      <EntityTypeMapping TypeName="GVDBModel.OrderDetail">
-        <MappingFragment StoreEntitySet="OrderDetail">
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="GVDBModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="MIRPrice" ColumnName="MIRPrice" />
+          <ScalarProperty Name="MIRName" ColumnName="MIRName" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="MIRID" ColumnName="MIRID" />
-          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="CartID" ColumnName="CartID" />
+          <ScalarProperty Name="RecordID" ColumnName="RecordID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -46,19 +37,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Carts">
-      <EntityTypeMapping TypeName="GVDBModel.Cart">
-        <MappingFragment StoreEntitySet="Cart">
-          <ScalarProperty Name="MIRPrice" ColumnName="MIRPrice" />
-          <ScalarProperty Name="MIRName" ColumnName="MIRName" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
-          <ScalarProperty Name="MIRID" ColumnName="MIRID" />
-          <ScalarProperty Name="CartID" ColumnName="CartID" />
-          <ScalarProperty Name="RecordID" ColumnName="RecordID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="GVDBModel.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -68,15 +46,45 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="GVDBModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="MIRID" ColumnName="MIRID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderTransactions">
+      <EntityTypeMapping TypeName="GVDBModel.OrderTransaction">
+        <MappingFragment StoreEntitySet="OrderTransaction">
+          <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="MenuPrice" ColumnName="MenuPrice" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RawItems">
+      <EntityTypeMapping TypeName="GVDBModel.RawItem">
+        <MappingFragment StoreEntitySet="RawItem">
+          <ScalarProperty Name="RIQuantity" ColumnName="RIQuantity" />
+          <ScalarProperty Name="RIPrice" ColumnName="RIPrice" />
+          <ScalarProperty Name="RIDescription" ColumnName="RIDescription" />
+          <ScalarProperty Name="RIName" ColumnName="RIName" />
+          <ScalarProperty Name="RawID" ColumnName="RawID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SalesManagements">
       <EntityTypeMapping TypeName="GVDBModel.SalesManagement">
         <MappingFragment StoreEntitySet="SalesManagement">
+          <ScalarProperty Name="Cashier" ColumnName="Cashier" />
           <ScalarProperty Name="TotalSales" ColumnName="TotalSales" />
-          <ScalarProperty Name="CalendarDateType" ColumnName="CalendarDateType" />
-          <ScalarProperty Name="SPYearId" ColumnName="SPYearId" />
-          <ScalarProperty Name="SPMonthId" ColumnName="SPMonthId" />
-          <ScalarProperty Name="SPWeekId" ColumnName="SPWeekId" />
-          <ScalarProperty Name="SPDayId" ColumnName="SPDayId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="SalesManagementId" ColumnName="SalesManagementId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -114,6 +122,18 @@
           <ScalarProperty Name="SPYearSales" ColumnName="SPYearSales" />
           <ScalarProperty Name="SPYearDate" ColumnName="SPYearDate" />
           <ScalarProperty Name="SPYearId" ColumnName="SPYearId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionItems">
+      <EntityTypeMapping TypeName="GVDBModel.TransactionItem">
+        <MappingFragment StoreEntitySet="TransactionItem">
+          <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="MenuPrice" ColumnName="MenuPrice" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -15,11 +15,8 @@ namespace GieAndVince.Models.Db
     public partial class SalesManagement
     {
         public int SalesManagementId { get; set; }
-        public int SPDayId { get; set; }
-        public int SPWeekId { get; set; }
-        public int SPMonthId { get; set; }
-        public int SPYearId { get; set; }
-        public string CalendarDateType { get; set; }
-        public decimal TotalSales { get; set; }
+        public System.DateTime Date { get; set; }
+        public double TotalSales { get; set; }
+        public string Cashier { get; set; }
     }
 }

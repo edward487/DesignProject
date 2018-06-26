@@ -20,6 +20,6 @@ namespace GieAndVince.Models.Db
         public Nullable<int> Count { get; set; }
         public System.DateTime DateCreated { get; set; }
         public string MIRName { get; set; }
-        public decimal MIRPrice { get; set; }
+        public double MIRPrice { get; set; }
     }
 }

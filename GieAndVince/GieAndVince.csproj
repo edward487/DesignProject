@@ -189,6 +189,9 @@
     <Compile Include="Models\Db\OrderDetail.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Db\OrderTransaction.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Db\RawItem.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
@@ -207,6 +210,9 @@
     <Compile Include="Models\Db\SalesperYear.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Db\TransactionItem.cs">
+      <DependentUpon>GVDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\ViewModel\AccountViewModel.cs" />
     <Compile Include="Models\ViewModel\CartViewModel.cs" />
@@ -217,6 +223,7 @@
     <Compile Include="Models\ViewModel\OrderDetailViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderViewModel.cs" />
     <Compile Include="Models\ViewModel\RawItemViewModel.cs" />
+    <Compile Include="Models\ViewModel\SalesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -387,6 +394,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SalesManagement\Index.cshtml" />
     <Content Include="Views\Account\List.cshtml" />
+    <Content Include="Views\OrderCart\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />

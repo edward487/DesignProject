@@ -1,0 +1,49 @@
+﻿@model IEnumerable<GieAndVince.Models.Db.Cart>
+
+@{
+    ViewBag.Title = "Payment";
+}
+
+<h2>Payment</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Menu Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+        </tr>
+    </thead>
+
+    @if (Model.Any())
+    {
+        double totalPrice = 0;
+        int totalItems = 0;
+        <tbody>
+            @foreach (var item in Model)
+            {
+                totalItems += (item.Count == null ? 1 : item.Count.Value);
+                totalPrice += (double)(item.Count * item.MIRPrice);
+                <tr>
+                    <td>@item.MIRName</td>
+                    <td>@item.MIRPrice</td>
+                    <td>@item.Count</td>
+                </tr>
+
+            }
+        </tbody>
+        <tfoot>
+            <tr><td colspan="3">Total: @totalPrice</td></tr>
+            <tr><td colspan="3">Total Items: @totalItems</td></tr>
+            <tr><td colspan="3">Cashier: @(Session["UserName"] != null ? Session["UserName"] : "NA" ) </td></tr>
+        </tfoot>
+    }
+
+
+</table>

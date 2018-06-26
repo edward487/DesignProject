@@ -62,7 +62,7 @@ namespace GieAndVince.Models
                 {
                     MIRID = menuRecipe.MIRID,
                     MIRName = menuRecipe.MIRName,
-                    MIRPrice = (decimal)menuRecipe.MIRPrice,
+                    MIRPrice = menuRecipe.MIRPrice.Value,
                     CartID = TransactionID,
                     Count = 1,
                     DateCreated = DateTime.Now
@@ -130,18 +130,18 @@ namespace GieAndVince.Models
             return count ?? 0;
         }
 
-        public decimal GetTotal()
+        public double GetTotal()
         {
             //Multiply menurecipe price by count of that menurecipe to get the current price for each of those menu recipe in the order summ all menurecipe price to get the ordertotal
 
-            decimal? total = (from orderItems in db.Carts.ToList() where orderItems.CartID == TransactionID select (orderItems.Count * orderItems.MIRPrice)).Sum();
+            double? total = (from orderItems in db.Carts.ToList() where orderItems.CartID == TransactionID select (orderItems.Count * orderItems.MIRPrice)).Sum();
 
-            return total ?? decimal.Zero;
+            return total ?? 0;
         }
 
         public int CreateOrder(Order order)
         {
-            decimal orderTotal = 0;
+            double orderTotal = 0;
 
             var orderItems = GetOrderitems();
 
@@ -157,7 +157,7 @@ namespace GieAndVince.Models
                 };
 
                 //Set the order total of the orders
-                orderTotal += ((int)item.Count * item.MIRPrice);
+                orderTotal += (double)(item.Count * item.MIRPrice);
 
                 db.OrderDetails.Add(orderDetail);
             }
@@ -174,6 +174,5 @@ namespace GieAndVince.Models
             //Return the OrderId as the confirmation number
             return order.OrderID;
         }
-       
     }
 }

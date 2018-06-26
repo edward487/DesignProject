@@ -105,17 +105,15 @@ namespace GieAndVince.Controllers
                     ViewBag.FailedMessage = "Wrong Username or Password";
                     return View("Login", login);
                 }
-                else
-                {
-                    Session["UserID"] = userDetails.UserID;
-                    Session["UserName"] = userDetails.Username;
-                    return RedirectToAction("Index", "Home");
-                }
+
+                Session["UserID"] = userDetails.UserID;
+                Session["UserName"] = userDetails.Username;
+                return RedirectToAction("Index", "Home");
             }
         }
         public ActionResult Logout()
         {
-            int userId = (int)Session["UserID"];
+            //int userId = (int)Session["UserID"];
             Session.Abandon();
             return RedirectToAction("Login", "Account");
         }

@@ -84,61 +84,75 @@
 </div>
 <div class="col-md-4">
     <h2>Orders</h2>
-
-    <p>
-        @Html.ActionLink("Purchase >>", "Payment", "Order")
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Order Name:
-                </th>
-                <th>
-                    Quantity:
-                </th>
-                <th>
-                    Price (each):
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="tbl-body">
-            @foreach (var item in Model.OrderItems)
-            {
-                <tr id="row-@item.RecordID" class="appendOrder" data-menu-id-row="@item.MIRID">
-                    <td>
-                        @Html.DisplayFor(o => item.MIRName)
-                    </td>
-                    <td data-menu-id="@item.MIRID" id="item-count-@item.RecordID" class="order-status">
-                        @Html.DisplayFor(o => item.Count)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(o => item.MIRPrice)
-                    </td>
-                    <td>
-                        <a href="#" class="RemoveLink close" data-id="@item.RecordID" data-price="@item.MIRPrice" onclick="deductQuantity(this)">x</a>
-                    </td>
+    <form action="Payment" method="post">
+        <p>
+            <input class="btn-link" type="submit" value="Purchase>>"/>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Order Name:
+                    </th>
+                    <th>
+                        Quantity:
+                    </th>
+                    <th>
+                        Price (each):
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <div class="form-horizontal">
-        <div class="container">
-            <div class="form-group">
-                <label class="col-md-6">Subtotal:</label>
-                <div class="col-md-6" id="total-price">
-                    @Model.OrderTotal
+            </thead>
+            <tbody id="tbl-body">
+                @{ 
+                    int index = 0;
+                }
+                @foreach (var item in Model.OrderItems)
+                {
+                    @Html.HiddenFor(o => o.OrderItems[index].RecordID);
+                    @Html.HiddenFor(o => o.OrderItems[index].MIRID);
+                    @Html.HiddenFor(o => o.OrderItems[index].MIRName);
+                    @Html.HiddenFor(o => o.OrderItems[index].MIRPrice);
+                    @Html.HiddenFor(o => o.OrderItems[index].Count);
+                    index++;
+
+                    <tr id="row-@item.RecordID" class="appendOrder" data-menu-id-row="@item.MIRID">
+                        <td>
+                            @Html.DisplayFor(o => item.MIRName)
+                        </td>
+                        <td data-menu-id="@item.MIRID" id="item-count-@item.RecordID" class="order-status">
+                            @Html.DisplayFor(o => item.Count)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(o => item.MIRPrice)
+                        </td>
+                        <td>
+                            <a href="#" class="RemoveLink close" data-id="@item.RecordID" data-price="@item.MIRPrice" onclick="deductQuantity(this)">x</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="form-horizontal">
+            <div class="container">
+                <div class="form-group">
+                    <label class="col-md-6">Subtotal:</label>
+                    <div class="col-md-6" id="total-price">
+                        @Model.OrderTotal
+                        @Html.HiddenFor(o => o.OrderTotal)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-6">Items:</label>
-                <div class="col-md-6" id="item-count">
-                    @Model.OrderCount
+                <div class="form-group">
+                    <label class="col-md-6">Items:</label>
+                    <div class="col-md-6" id="item-count">
+                        @Model.OrderCount
+                        @Html.HiddenFor(o => o.OrderCount)
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+    
 </div>
 
 @section scripts{
