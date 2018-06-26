@@ -37,7 +37,7 @@ namespace GieAndVince.Controllers
                 {
                     sales = sales.Where(o => getWeekOfYear(o.Date) == getWeekOfYear(date.Date)).ToList();
 
-                    int week = getWeekOfYear(date.Date) + 1;
+                    int week = getWeekOfYear(date.Date);
                     double total = 0;
                     salesVm.week = week;
 

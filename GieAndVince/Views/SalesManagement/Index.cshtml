@@ -2,19 +2,38 @@
 
 @{
     ViewBag.Title = "Index";
+    var dateStr = Model.date != null ? Model.date.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
 }
 
 <h2>Index</h2>
 
-<a href="Index?f=d" class="btn btn-success" onclick="">Sort by Day</a>
-<a href="Index?f=w" class="btn btn-success" onclick="">Sort by Week</a>
-<a href="Index?f=m" class="btn btn-success" onclick="">Sort by Month</a>
-<a href="Index?f=y" class="btn btn-success" onclick="">Sort by Year</a>
+<a href="Index?f=d&d=@dateStr" class="btn btn-success" onclick="">Sort by Day</a>
+<a href="Index?f=w&d=@dateStr" class="btn btn-success" onclick="">Sort by Week</a>
+<a href="Index?f=m&d=@dateStr" class="btn btn-success" onclick="">Sort by Month</a>
+<a href="Index?f=y&d=@dateStr" class="btn btn-success" onclick="">Sort by Year</a>
+
+<input id="date-filter" type="date" value="@dateStr" onchange="filterDate()" />
+
 <div class="lh-50">&nbsp;</div>
 <table class="table">
     <tr>
         <th>
-            Date
+            @if (Model.filter == "d")
+            {
+                @Model.date.ToString("MMMM dd, yyyy")
+            }
+            else if (Model.filter == "w")
+            {
+                @:Week @Model.week
+            }
+            else if (Model.filter == "m")
+            {
+                @Model.date.ToString("MMM yyyy")
+            }
+            else if (Model.filter == "y")
+            {
+                @Model.date.ToString("yyyy")
+            }
         </th>
         <th>
             Total
@@ -34,15 +53,15 @@
             }
             else if (Model.filter == "w")
             {
-                @:Week @Model.week, @Model.date.ToString("MMM, yyyy")
+                @Model.date.ToString("dddd, MMM, dd yyyy")
             }
             else if (Model.filter == "m")
             {
-                @Model.date.ToString("MMM, yyyy")
+                @Model.date.ToString("MMM dd, yyyy")
             }
             else if (Model.filter == "y")
             {
-                @Model.date.ToString("yyyy")
+                @Model.date.ToString("MMM yyyy")
             }
         </td>
         <td>
@@ -115,6 +134,8 @@
         console.log(json.length);
         var html = "";
 
+        $("#details tbody").html("");
+
         for (var i = 0; i < json.length - 1 ; i++) {
             var row = json[i];
             html += "<tr><td>" + row.name + "</td> \
@@ -131,4 +152,10 @@
 
         $("#salesDetails").modal("show");
     }
+
+    function filterDate() {
+        var date = $("#date-filter").val();
+        document.location = "/SalesManagement/Index?f=@Model.filter&d=" + date;  
+    }
+
 </script>
