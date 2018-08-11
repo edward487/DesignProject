@@ -7,6 +7,7 @@ using GieAndVince.Models;
 using GieAndVince.Models.Db;
 using GieAndVince.Models.ViewModel;
 using System.Web.Services;
+using GieAndVince.OPOS;
 
 namespace GieAndVince.Controllers
 {
@@ -142,7 +143,44 @@ namespace GieAndVince.Controllers
                 db.SaveChanges();
             }
 
+            printReciept(orders);
             return View(orders);
+        }
+
+        private void printReciept(IList<Cart> orders)
+        {
+            int maxWidth = 42;
+            int spacer1 = 5;
+            int spacer2 = 30;
+            int spacer3 = 7;
+            OposPrinter printer = new OposPrinter("ThermPrinter");
+            printer.OpenPosPrinter();
+            printer.PrintBoldLn("Gie And Vince");
+            printer.PrintBoldLn("");
+            printer.PrintLn("Qty  Item                            Price");
+            printer.PrintLn("");
+            double total = 0;
+            foreach (Cart order in orders)
+            {
+                total += order.MIRPrice * order.Count.Value;
+                string count = order.Count.Value.ToString();
+                string name = order.MIRName.Length > 20 ? order.MIRName.Substring(0, 17) + "..." : order.MIRName;
+                string price = ((order.MIRPrice * order.Count.Value)).ToString("0.00");
+                printer.PrintLn(count + new string(' ', spacer1-count.Length) + name + new string(' ', spacer2-name.Length) + new string(' ', spacer3-price.Length) + price);
+            }
+
+            printer.PrintLn(new string('-', maxWidth));
+            printer.PrintLn("TOTAL:" + new string(' ', 36-total.ToString("0.00").Length) + total.ToString("0.00"));
+            printer.PrintLn("");
+            printer.PrintLn("Thankyou and please come again!");
+            printer.PrintLn("");
+            printer.PrintLn("");
+            printer.PrintLn("");
+            printer.PrintLn("");
+            printer.PrintLn("");
+            printer.PrintLn("");
+            printer.CutPrinter();
+            printer.ClosePosPrinter();
         }
     }
 }

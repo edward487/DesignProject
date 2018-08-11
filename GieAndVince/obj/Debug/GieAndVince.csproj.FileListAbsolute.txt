@@ -182,3 +182,4 @@ D:\Projects\GieAndVince\DesignProject\GieAndVince\obj\Debug\GieAndVince.csproj.C
 D:\Projects\GieAndVince\DesignProject\GieAndVince\obj\Debug\GieAndVince.dll
 D:\Projects\GieAndVince\DesignProject\GieAndVince\obj\Debug\GieAndVince.pdb
 D:\Projects\GieAndVince\DesignProject\GieAndVince\obj\Debug\GieAndVince.csprojResolveAssemblyReference.cache
+D:\Projects\GieAndVince\DesignProject\GieAndVince\bin\Interop.OposPOSPrinter_CCO.dll
