@@ -19,7 +19,7 @@
             <button class="btn btn-warning" style="padding: 10px 55px 10px 55px;">Pasta</button>
             @foreach (var pasta in Model.Where(x => x.MIRCategory == "Pasta"))
             {
-                <button href="javascript:void(0);" class="buttonItem btn-default" data-id="@pasta.MIRID">@Html.DisplayFor(o => pasta.MIRName)</button>
+                <button href="javascript:void(0);" class="buttonItem " data-id="@pasta.MIRID">@Html.DisplayFor(o => pasta.MIRName)</button>
             }
         </div>
     </div>

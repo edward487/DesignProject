@@ -24,14 +24,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Gie and Vince", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Gie and Vince", "Index", "OrderCart", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Raw Items", "Index", "Rawitems")</li>
-                    <li>@Html.ActionLink("Main Menu", "Index", "MenuRecipes")</li>
-                    <li>@Html.ActionLink("Transaction", "Index", "OrderCart")</li>
+                    <!--<li>@Html.ActionLink("Home", "Index", "OrderCart")</li>-->
+                    <li>@Html.ActionLink("Raw Items", "Index", "RawItems")</li>
+                    <li>@Html.ActionLink("Menu Recipes", "Index", "MenuRecipes")</li>
+                    <li>@Html.ActionLink("Sales", "Index", "SalesManagement")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
@@ -47,6 +47,6 @@
             <p>&copy; @DateTime.Now.Year - Gie And Vince</p>
         </footer>
     </div>
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)  
 </body>
 </html>

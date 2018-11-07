@@ -401,6 +401,12 @@
     <Content Include="Views\SalesManagement\Index.cshtml" />
     <Content Include="Views\Account\List.cshtml" />
     <Content Include="Views\OrderCart\Payment.cshtml" />
+    <Content Include="Views\OrderCart\Pasta.cshtml" />
+    <Content Include="Views\OrderCart\Drinks.cshtml" />
+    <Content Include="Views\OrderCart\Sandwiches.cshtml" />
+    <Content Include="Views\OrderCart\Pika Pika.cshtml" />
+    <Content Include="Views\OrderCart\Dessert.cshtml" />
+    <Content Include="Views\OrderCart\Rice Meal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />

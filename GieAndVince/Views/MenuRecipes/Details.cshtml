@@ -1,8 +1,14 @@
 ﻿@model GieAndVince.Models.Db.MenuRecipe
-
 @{
     ViewBag.Title = "Details";
 }
+
+<style>
+    .form-group {
+        display: flex;
+        align-items: center;
+    }
+</style>
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -14,13 +20,13 @@
 <div class="col-md-offset-3">
     <div class="form-horizontal">
         <div class="form-group">
-            @Html.LabelFor(model => model.MIRName, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.MIRName, htmlAttributes: new { @class = "control-label col-md-3" })
+            </div>
             <div class="col-md-6">
                 @Html.DisplayFor(model => model.MIRName)
             </div>
-            <div class="col-md-3"></div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.MIRPrice, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-6">
@@ -28,7 +34,6 @@
             </div>
             <div class="col-md-3"></div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.MIRCategory, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-6">
@@ -36,7 +41,6 @@
             </div>
             <div class="col-md-3"></div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.MIRSize, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-6">
@@ -44,7 +48,6 @@
             </div>
             <div class="col-md-3"></div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.MIRRecipe, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-6">
@@ -52,9 +55,7 @@
             </div>
             <div class="col-md-3"></div>
         </div>
-
         <div class="lh-50">&nbsp;</div>
-
         <div class="modal-footer"></div>
     </div>
 </div>

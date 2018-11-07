@@ -1,93 +1,118 @@
 ﻿@model GieAndVince.Models.ViewModel.OrderCartViewModel
-
 @{
     ViewBag.Title = "Index";
 }
 <style>
+    .flex-grid {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
     .btn-category {
-        min-height:40px;
-        min-width: 125px;
+        min-height: 60px;
+        min-width: 180px;
+        border: 2px solid #fff;
+        border-radius: 0px;
+        background: #ff9521;
+        color: #fff;
     }
+
+    .btn-category:hover {
+        color: #fff;
+        background: #ff7b18;
+    }
+
     .btn-items {
-        min-height:60px;
-        min-width:125px;
+        min-height: 60px;
+        min-width: 125px;
+        background: #e1682b;
+        border: none;
+        margin: 4px;
+        color: #fff;
+        flex: auto;
     }
+
     .lh-20 {
         line-height: 15px;
     }
+
+    .modal {
+        overflow-y: auto;
+    }
+
+    .modal-backdrop {
+        display: none;
+    }
+
+    body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
+        margin-right: 0;
+    }
+
+    .button-white-text {
+        color: white;
+        text-decoration: none;
+    }
+
+    .button-white-text:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+    .font-24 {
+        font-size: 24px;
+    }
+
+    .table {
+        min-width: 600px;
+    }
 </style>
 <h2 align="center"><strong>Transaction</strong></h2>
-<div class="lh-50">&nbsp;</div>
 
-<div class="col-md-8">
+
+
+<!--Menu-->
+<div class="col-md-12">
     <div class="form-group">
         <div class="col-md-2">
-            <div class="lh-20">&nbsp;</div>
-            <button class="btn btn-warning btn-category">Pasta</button>
-            @foreach (var pasta in Model.MenuRecipeList.Where(x => x.MIRCategory == "Pasta"))
-            {
-                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@pasta.MIRID" value="@Html.DisplayFor(o => pasta.MIRName)">@Html.DisplayFor(o => pasta.MIRName)</button>
-            }
-        </div>
-    </div>
 
-
-    <div class="form-group">
-        <div class="col-md-2">
-            <button class="btn btn-warning btn-category">Drinks</button>
-            @foreach (var drinks in Model.MenuRecipeList.Where(x => x.MIRCategory == "Drinks"))
-            {
-                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@drinks.MIRID" value="@Html.DisplayFor(o => drinks.MIRName)">@Html.DisplayFor(o => drinks.MIRName)</button>
-            }
+            <button class="btn btn-category" data-toggle="modal" data-target="#myModalPasta">Pasta</button>
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-2">
-            <button class="btn btn-warning btn-category">Sandwiches</button>
-            @foreach (var sw in Model.MenuRecipeList.Where(x => x.MIRCategory == "Sandwiches"))
-            {
-                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@sw.MIRID" value="@Html.DisplayFor(o => sw.MIRName)">@Html.DisplayFor(o => sw.MIRName)</button>
-            }
+            <button class="btn btn-category" data-toggle="modal" data-target="#myModalDrinks">Drinks</button>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-2">
-            <button class="btn btn-warning btn-category">Pika Pika</button>
-            @foreach (var pk in Model.MenuRecipeList.Where(x => x.MIRCategory == "Pika Pika"))
-            {
-                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@pk.MIRID" value="@Html.DisplayFor(o => pk.MIRName)">@Html.DisplayFor(o => pk.MIRName)</button>
-            }
+            <button class="btn btn-category" data-toggle="modal" data-target="#myModalSandwiches">Sandwiches</button>
         </div>
     </div>
-
     <div class="form-group">
         <div class="col-md-2">
-            <button class="btn btn-warning btn-category">Dessert</button>
-            @foreach (var dessert in Model.MenuRecipeList.Where(x => x.MIRCategory == "Dessert"))
-            {
-                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@dessert.MIRID" value="@Html.DisplayFor(o => dessert.MIRName)">@Html.DisplayFor(o => dessert.MIRName)</button>
-            }
+            <button class="btn btn-category" data-toggle="modal" data-target="#myModalPikaPika">Pika Pika</button>
         </div>
     </div>
-
     <div class="form-group">
         <div class="col-md-2">
-            <button class="btn btn-warning btn-category">Rice Meal</button>
-            @foreach (var rm in Model.MenuRecipeList.Where(x => x.MIRCategory == "Rice Meal"))
-            {
-                <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@rm.MIRID" value="@Html.DisplayFor(o => rm.MIRName)">@Html.DisplayFor(o => rm.MIRName)</button>
-            }
+            <button class="btn btn-category" data-toggle="modal" data-target="#myModalDessert">Dessert</button>
         </div>
     </div>
-
+    <div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-category" data-toggle="modal" data-target="#myModalRiceMeal">Rice Meal</button>
+        </div>
+    </div>
+    <div class="lh-20">&nbsp;</div>
 </div>
-<div class="col-md-4">
+
+
+
+<!-- Orders -->
+<div class="col-md-12">
     <h2>Orders</h2>
     <form action="Payment" method="post">
-        <p>
-            <input class="btn-link" type="submit" value="Purchase>>"/>
-        </p>
         <table class="table">
             <thead>
                 <tr>
@@ -104,7 +129,7 @@
                 </tr>
             </thead>
             <tbody id="tbl-body">
-                @{ 
+                @{
                     int index = 0;
                 }
                 @foreach (var item in Model.OrderItems)
@@ -135,24 +160,173 @@
         </table>
         <div class="form-horizontal">
             <div class="container">
-                <div class="form-group">
-                    <label class="col-md-6">Subtotal:</label>
-                    <div class="col-md-6" id="total-price">
-                        @Model.OrderTotal
-                        @Html.HiddenFor(o => o.OrderTotal)
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-6">Items:</label>
-                    <div class="col-md-6" id="item-count">
+                <div class="form-group flex-grid">
+                    <label class="font-24">Items:</label>
+                    &nbsp;
+                    <div class="font-24" id="item-count">
                         @Model.OrderCount
                         @Html.HiddenFor(o => o.OrderCount)
                     </div>
                 </div>
+                <div class="form-group flex-grid">
+                    <label class="font-24">Subtotal:</label>
+                    &nbsp;
+                    <div class="font-24" id="total-price">
+                        @Model.OrderTotal
+                        @Html.HiddenFor(o => o.OrderTotal)
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <button class="btn btn-success" type="submit" value="Purchase">Purchase</button>
+        
     </form>
-    
+
+</div>
+
+<!-- Pasta Modal -->
+<div class="modal fade" id="myModalPasta" tabindex="-1" role="dialog" aria-labelledby="myModalPastaLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center" id="myModalPastaLabel">Pasta</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Pasta Modal Content -->
+                <div class="flex-grid">
+                    @foreach (var pasta in Model.MenuRecipeList.Where(x => x.MIRCategory == "Pasta"))
+                    {
+                        <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@pasta.MIRID" value="@Html.DisplayFor(o => pasta.MIRName)">@Html.DisplayFor(o => pasta.MIRName)</button>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Drinks Modal -->
+<div class="modal fade" id="myModalDrinks" tabindex="-1" role="dialog" aria-labelledby="myModalDrinksLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center" id="myModalDrinksLabel">Drinks</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Drinks Modal Content -->
+                <div class="flex-grid">
+                    @foreach (var drinks in Model.MenuRecipeList.Where(x => x.MIRCategory == "Drinks"))
+                    {
+                        <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@drinks.MIRID" value="@Html.DisplayFor(o => drinks.MIRName)">@Html.DisplayFor(o => drinks.MIRName)</button>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sandwiches Modal -->
+<div class="modal fade" id="myModalSandwiches" tabindex="-1" role="dialog" aria-labelledby="myModalSandwichesLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center" id="myModalSandwichesLabel">Sandwiches</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Sandwiches Modal Content -->
+                <div class="flex-grid">
+                    @foreach (var sw in Model.MenuRecipeList.Where(x => x.MIRCategory == "Sandwiches"))
+                    {
+                        <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@sw.MIRID" value="@Html.DisplayFor(o => sw.MIRName)">@Html.DisplayFor(o => sw.MIRName)</button>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pika Pika Modal -->
+<div class="modal fade" id="myModalPikaPika" tabindex="-1" role="dialog" aria-labelledby="myModalPikaPikaLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center" id="myModalPikaPikaLabel">PikaPika</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Pika Pika Modal Content -->
+                <div class="flex-grid">
+                    @foreach (var pk in Model.MenuRecipeList.Where(x => x.MIRCategory == "Pika Pika"))
+                    {
+                        <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@pk.MIRID" value="@Html.DisplayFor(o => pk.MIRName)">@Html.DisplayFor(o => pk.MIRName)</button>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dessert Modal -->
+<div class="modal fade" id="myModalDessert" tabindex="-1" role="dialog" aria-labelledby="myModalDessertLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center" id="myModalPikaPikaLabel">Dessert</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Dessert Modal Content -->
+                <div class="flex-grid">
+                    @foreach (var dessert in Model.MenuRecipeList.Where(x => x.MIRCategory == "Dessert"))
+                    {
+                        <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@dessert.MIRID" value="@Html.DisplayFor(o => dessert.MIRName)">@Html.DisplayFor(o => dessert.MIRName)</button>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Rice Meal Modal -->
+<div class="modal fade" id="myModalRiceMeal" tabindex="-1" role="dialog" aria-labelledby="myModalRiceMealLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center" id="myModalPikaPikaLabel">Rice Meal</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Rice Meal Modal Content -->
+                <div class="flex-grid">
+                    @foreach (var rm in Model.MenuRecipeList.Where(x => x.MIRCategory == "Rice Meal"))
+                    {
+                        <button href="javascript:void(0);" class="buttonItem btn-items" data-id="@rm.MIRID" value="@Html.DisplayFor(o => rm.MIRName)">@Html.DisplayFor(o => rm.MIRName)</button>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section scripts{
@@ -174,7 +348,7 @@
                 datatype: "json",
                 success: function (data) {
 
-                    if ($("tr[data-menu-id-row='"+id+"']").html() != undefined) {
+                    if ($("tr[data-menu-id-row='" + id + "']").html() != undefined) {
                         $('.appendOrders').append(data);
                         $("td[data-menu-id='" + id + "']").text($("td[data-menu-id='" + id + "']").text() * 1 + 1);
                     }
@@ -182,7 +356,7 @@
                         createNewRow(JSON.parse(data));
                     }
                     $("#item-count").text($("#item-count").text() * 1 + 1);
-                    $("#total-price").text(($("#total-price").text()*1) + (JSON.parse(data).Price*1));
+                    $("#total-price").text(($("#total-price").text() * 1) + (JSON.parse(data).Price * 1));
                 },
                 error: function (msg) { }
             })
@@ -191,17 +365,17 @@
         function createNewRow(data) {
 
             var row = "<tr id=\"row-" + data.OrderId + "\" class=\"appendOrder\" data-menu-id-row=\"" + data.Id + "\" > \
-                <td>" + data.Name + "</td> \
-                <td data-menu-id=\"" + data.Id + "\" id=\"item-count-" + data.OrderId + "\" class=\"order-status\">1</td> \
-                <td>" + data.Price + "</td> \
-                <td><a href=\"#\" class=\"RemoveLink close\" data-id=\"" + data.OrderId + "\" data-price=\"" + data.Price + "\" onclick=\"deductQuantity(this)\">x</a></td> \
-            </tr >";
+                                    <td>" + data.Name + "</td> \
+                                    <td data-menu-id=\"" + data.Id + "\" id=\"item-count-" + data.OrderId + "\" class=\"order-status\">1</td> \
+                                    <td>" + data.Price + "</td> \
+                                    <td><a href=\"#\" class=\"RemoveLink close\" data-id=\"" + data.OrderId + "\" data-price=\"" + data.Price + "\" onclick=\"deductQuantity(this)\">x</a></td> \
+                                </tr >";
 
             $("#tbl-body").append(row);
 
         }
 
-                //End adding item to cart
+        //End adding item to cart
         function deductQuantity(self) {
             //Get the id from the link
             var recordToDelete = $(self).data("id");
@@ -248,6 +422,6 @@
 
             $('#order-status').text('Order(' + data.OrderCount + ')');
         }
-       
+
     </script>
 }
