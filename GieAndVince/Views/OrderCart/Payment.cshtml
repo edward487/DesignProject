@@ -3,48 +3,49 @@
 @{
     ViewBag.Title = "Payment";
 }
+<div class="jumbotron">
+    <div align="center">
+        <h2>Payment Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="col-md-4">
+                    Menu Name
+                </th>
+                <th class="col-md-4">
+                    Price
+                </th>
+                <th class="col-md-4">
+                    Quantity
+                </th>
+            </tr>
+        </thead>
+        @if (Model.Any())
+        {
+            double totalPrice = 0;
+            int totalItems = 0;
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    totalItems += (item.Count == null ? 1 : item.Count.Value);
+                    totalPrice += (double)(item.Count * item.MIRPrice);
+                    <tr>
+                        <td class="col-md-4">@item.MIRName</td>
+                        <td class="col-md-4">@item.MIRPrice</td>
+                        <td class="col-md-4">@item.Count</td>
+                    </tr>
 
-<h2>Payment</h2>
+                }
+            </tbody>
+            <tfoot>
+                <tr><td class="col-md-4"><strong>Total:</strong> @totalPrice</td></tr>
+                <tr><td class="col-md-4"><strong>Total Items:</strong> @totalItems</td></tr>
+                <tr><td class="col-md-4"><strong>Cashier:</strong> @(Session["UserName"] != null ? Session["UserName"] : "NA" ) </td></tr>
+                <!-- <tr><td colspan="3">Change: </td></tr> -->
+            </tfoot>
+        }
 
-<table>
-    <thead>
-        <tr>
-            <th>
-                Menu Name
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                Quantity
-            </th>
-        </tr>
-    </thead>
-
-    @if (Model.Any())
-    {
-        double totalPrice = 0;
-        int totalItems = 0;
-        <tbody>
-            @foreach (var item in Model)
-            {
-                totalItems += (item.Count == null ? 1 : item.Count.Value);
-                totalPrice += (double)(item.Count * item.MIRPrice);
-                <tr>
-                    <td>@item.MIRName</td>
-                    <td>@item.MIRPrice</td>
-                    <td>@item.Count</td>
-                </tr>
-
-            }
-        </tbody>
-        <tfoot>
-            <tr><td colspan="3">Total: @totalPrice</td></tr>
-            <tr><td colspan="3">Total Items: @totalItems</td></tr>
-            <tr><td colspan="3">Cashier: @(Session["UserName"] != null ? Session["UserName"] : "NA" ) </td></tr>
-            <!-- <tr><td colspan="3">Change: </td></tr> -->
-        </tfoot>
-    }
-
-
-</table>
+    </table>
+    <p>@Html.ActionLink("Order Again", "Index", "OrderCart")</p>
+    </div>
+</div>

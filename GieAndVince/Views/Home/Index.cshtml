@@ -8,9 +8,22 @@
         display: flex;
         justify-content: center;
     }
+    .proceedLayout {
+        font-size: 24px;
+        font-weight:bold;
+    }
+    .jumbotron {
+        background-color: #f2f2f2 !important;
+    }
 </style>
 
 <div class="flex-container">
-    <div><h1>Welcome</h1></div>
-    <div><p>@Html.ActionLink("Proceed to Transaction", "Index", "OrderCart")</p></div>
+    <div class="jumbotron" align="center">
+        <img src="~/fonts/logo.jpg"><img />
+        <h1>Welcome to Gie and Vince</h1>
+        <h3>Computer based Transactions and Management System</h3>
+    </div>
+    <div align="center">
+        <p class="proceedLayout">@Html.ActionLink("Proceed to Transaction", "Index", "OrderCart")</p>
+    </div>
 </div>

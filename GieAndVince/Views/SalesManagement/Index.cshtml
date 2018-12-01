@@ -1,18 +1,17 @@
 ﻿@model  GieAndVince.Models.ViewModel.SalesViewModel
-
 @{
     ViewBag.Title = "Index";
     var dateStr = Model.date != null ? Model.date.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
 }
-
 <style>
+
     .flex-grid {
         display: flex;
         flex-wrap: wrap;
     }
 
     .flex-auto {
-        flex:auto;
+        flex: auto;
     }
 
     .btn {
@@ -25,116 +24,108 @@
         font-size: 20px;
     }
 </style>
-
 <h2>Sales Management</h2>
-
 <div class="flex-grid">
     <a href="Index?f=d&d=@dateStr" class="btn btn-success" onclick="">Sort by Day</a>
     <a href="Index?f=w&d=@dateStr" class="btn btn-success" onclick="">Sort by Week</a>
     <a href="Index?f=m&d=@dateStr" class="btn btn-success" onclick="">Sort by Month</a>
     <a href="Index?f=y&d=@dateStr" class="btn btn-success" onclick="">Sort by Year</a>
 </div>
-
 <div class="lh-50">&nbsp;</div>
-
 <div class="flex-grid flex-auto">
     <input id="date-filter" type="date" value="@dateStr" onchange="filterDate()" />
 </div>
 
-
 <div class="lh-50">&nbsp;</div>
-<table class="table">
-    <tr>
-        <th>
+<div class="scrollbar" id="style-1">
+    <table class="table">
+        <tr>
+            <th>
+                @if (Model.filter == "d")
+                {
+                    @Model.date.ToString("MMMM dd, yyyy")
+                }
+                else if (Model.filter == "w")
+                {
+                    @:Week @Model.week
+                }
+                else if (Model.filter == "m")
+                {
+                    @Model.date.ToString("MMM yyyy")
+                }
+                else if (Model.filter == "y")
+                {
+                    @Model.date.ToString("yyyy")
+                }
+            </th>
+            <th>
+                Total
+            </th>
             @if (Model.filter == "d")
             {
-                @Model.date.ToString("MMMM dd, yyyy")
+                <th></th>
             }
-            else if (Model.filter == "w")
-            {
-                @:Week @Model.week
-            }
-            else if (Model.filter == "m")
-            {
-                @Model.date.ToString("MMM yyyy")
-            }
-            else if (Model.filter == "y")
-            {
-                @Model.date.ToString("yyyy")
-            }
-        </th>
-        <th>
-            Total
-        </th>
-        @if (Model.filter == "d")
+        </tr>
+        @foreach (var item in Model.sales)
         {
-            <th></th>
+            <tr>
+                <td>
+                    @if (Model.filter == "d")
+                    {
+                        @item.Date.ToString("hh:mm tt")
+                    }
+                    else if (Model.filter == "w")
+                    {
+                        @Model.date.ToString("dddd, MMM, dd yyyy")
+                    }
+                    else if (Model.filter == "m")
+                    {
+                        @Model.date.ToString("MMM dd, yyyy")
+                    }
+                    else if (Model.filter == "y")
+                    {
+                        @Model.date.ToString("MMM yyyy")
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalSales)
+                </td>
+                @if (Model.filter == "d")
+                {
+                    <td>
+                        <button data-id="@item.SalesManagementId" onclick="showDetails(this)">Details</button>
+                        @*@Html.ActionLink("Delete", "Delete", new { id=item.SalesManagementId })*@
+                    </td>
+                }
+            </tr>
         }
-    </tr>
-
-@foreach (var item in Model.sales) {
-    <tr>
-        <td>
-            @if (Model.filter == "d")
-            {
-                @item.Date.ToString("hh:mm tt")
-            }
-            else if (Model.filter == "w")
-            {
-                @Model.date.ToString("dddd, MMM, dd yyyy")
-            }
-            else if (Model.filter == "m")
-            {
-                @Model.date.ToString("MMM dd, yyyy")
-            }
-            else if (Model.filter == "y")
-            {
-                @Model.date.ToString("MMM yyyy")
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalSales)
-        </td>
-
-        @if (Model.filter == "d")
-        {
-            <td>
-                <button data-id="@item.SalesManagementId" onclick="showDetails(this)">Details</button>
-                @*@Html.ActionLink("Delete", "Delete", new { id=item.SalesManagementId })*@
-            </td>
-        }
-    </tr>
-}
-
-</table>
-
-<div id='salesDetails' class='modal fade'>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <table id="details">
-                <thead>
-                    <tr>
-                        <th>Menu</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                    <tr><td colspan="3">Time: <span id="time"></span></td></tr>
-                    <tr><td colspan="3">Total Price: <span id="total-price"></span></td></tr>
-                    <tr><td colspan="3">Cashier: <span id="cashier"></span></td></tr>
-                </tfoot>
-            </table>
+    </table>
+    </div>
+    <div id='salesDetails' class='modal fade'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <table id="details">
+                    <thead>
+                        <tr>
+                            <th>Menu</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr><td colspan="3">Time: <span id="time"></span></td></tr>
+                        <tr><td colspan="3">Total Price: <span id="total-price"></span></td></tr>
+                        <tr><td colspan="3">Cashier: <span id="cashier"></span></td></tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
-<script>
+    <script>
     $(function () {
 
-        
+
     });
 
     function showDetails(self) {
@@ -183,7 +174,7 @@
 
     function filterDate() {
         var date = $("#date-filter").val();
-        document.location = "/SalesManagement/Index?f=@Model.filter&d=" + date;  
+        document.location = "/SalesManagement/Index?f=@Model.filter&d=" + date;
     }
 
-</script>
+    </script>

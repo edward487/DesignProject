@@ -163,8 +163,9 @@ namespace GieAndVince.Controllers
             OposPrinter printer = new OposPrinter("ThermPrinter");
             printer.OpenPosPrinter();
             printer.PrintBoldLn("Gie And Vince");
-            printer.PrintLn("Tayabas City, Quezon");
+            printer.PrintLn("      94 CM Recto Street Tayabas City");
             printer.PrintBoldLn("");
+            printer.PrintLn("Transaction ID:");
             printer.PrintLn("Qty  Item                            Price");
             printer.PrintLn("");
             double total = 0;
@@ -176,14 +177,22 @@ namespace GieAndVince.Controllers
                 string price = ((order.MIRPrice * order.Count.Value)).ToString("0.00");
                 printer.PrintLn(count + new string(' ', spacer1-count.Length) + name + new string(' ', spacer2-name.Length) + new string(' ', spacer3-price.Length) + price);
             }
-
+        
             printer.PrintLn(new string('-', maxWidth));
             printer.PrintLn("TOTAL:" + new string(' ', 36-total.ToString("0.00").Length) + total.ToString("0.00"));
             printer.PrintLn("CASH:");
             printer.PrintLn("CHANGE:");
+            if (Session["UserName"] != null)
+            {
+                printer.PrintLn("Cashier:" + Session["UserName"]);
+            }
+            else {
+                printer.PrintLn("Cashier:" +  Session["UserName"] +":" +"NA");
+            }
+            
             printer.PrintLn("DATE:" + DateTime.Now.ToString());
             printer.PrintLn("");
-            printer.PrintLn("Thankyou and please come again!");
+            printer.PrintLn("       Thankyou and please come again!");
             printer.PrintLn("");
             printer.PrintLn("");
             printer.PrintLn("");
