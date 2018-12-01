@@ -5,14 +5,42 @@
     var dateStr = Model.date != null ? Model.date.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
 }
 
-<h2>Index</h2>
+<style>
+    .flex-grid {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-<a href="Index?f=d&d=@dateStr" class="btn btn-success" onclick="">Sort by Day</a>
-<a href="Index?f=w&d=@dateStr" class="btn btn-success" onclick="">Sort by Week</a>
-<a href="Index?f=m&d=@dateStr" class="btn btn-success" onclick="">Sort by Month</a>
-<a href="Index?f=y&d=@dateStr" class="btn btn-success" onclick="">Sort by Year</a>
+    .flex-auto {
+        flex:auto;
+    }
 
-<input id="date-filter" type="date" value="@dateStr" onchange="filterDate()" />
+    .btn {
+        flex: auto;
+        margin: 0 3px;
+    }
+
+    #date-filter {
+        justify-content: center;
+        font-size: 20px;
+    }
+</style>
+
+<h2>Sales Management</h2>
+
+<div class="flex-grid">
+    <a href="Index?f=d&d=@dateStr" class="btn btn-success" onclick="">Sort by Day</a>
+    <a href="Index?f=w&d=@dateStr" class="btn btn-success" onclick="">Sort by Week</a>
+    <a href="Index?f=m&d=@dateStr" class="btn btn-success" onclick="">Sort by Month</a>
+    <a href="Index?f=y&d=@dateStr" class="btn btn-success" onclick="">Sort by Year</a>
+</div>
+
+<div class="lh-50">&nbsp;</div>
+
+<div class="flex-grid flex-auto">
+    <input id="date-filter" type="date" value="@dateStr" onchange="filterDate()" />
+</div>
+
 
 <div class="lh-50">&nbsp;</div>
 <table class="table">

@@ -13,6 +13,7 @@ namespace GieAndVince.Models.ViewModel
         public int MIRID { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
+        
 
         public virtual MenuRecipe MenuRecipe { get; set; }
         public virtual Order Order { get; set; }

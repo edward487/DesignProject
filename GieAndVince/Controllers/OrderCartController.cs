@@ -96,6 +96,13 @@ namespace GieAndVince.Controllers
             return PartialView("OrderSummary");
         }
 
+        /*
+        public ActionResult EnterAmount(FormCollection collection)
+        {
+            string amountPaid = collection.Get("Amount");
+            return amountPaid("EnterAmount");
+        }
+        */
 
         public ActionResult Payment()
         {
@@ -156,6 +163,7 @@ namespace GieAndVince.Controllers
             OposPrinter printer = new OposPrinter("ThermPrinter");
             printer.OpenPosPrinter();
             printer.PrintBoldLn("Gie And Vince");
+            printer.PrintLn("Tayabas City, Quezon");
             printer.PrintBoldLn("");
             printer.PrintLn("Qty  Item                            Price");
             printer.PrintLn("");
@@ -171,6 +179,9 @@ namespace GieAndVince.Controllers
 
             printer.PrintLn(new string('-', maxWidth));
             printer.PrintLn("TOTAL:" + new string(' ', 36-total.ToString("0.00").Length) + total.ToString("0.00"));
+            printer.PrintLn("CASH:");
+            printer.PrintLn("CHANGE:");
+            printer.PrintLn("DATE:" + DateTime.Now.ToString());
             printer.PrintLn("");
             printer.PrintLn("Thankyou and please come again!");
             printer.PrintLn("");

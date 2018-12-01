@@ -3,5 +3,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<style>
+    flex-container {
+        display: flex;
+        justify-content: center;
+    }
+</style>
 
+<div class="flex-container">
+    <div><h1>Welcome</h1></div>
+    <div><p>@Html.ActionLink("Proceed to Transaction", "Index", "OrderCart")</p></div>
+</div>
