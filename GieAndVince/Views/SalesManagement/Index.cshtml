@@ -24,12 +24,12 @@
         font-size: 20px;
     }
 </style>
-<h2>Sales Management</h2>
+<h2>Sales Record</h2>
 <div class="flex-grid">
-    <a href="Index?f=d&d=@dateStr" class="btn btn-success" onclick="">Sort by Day</a>
-    <a href="Index?f=w&d=@dateStr" class="btn btn-success" onclick="">Sort by Week</a>
-    <a href="Index?f=m&d=@dateStr" class="btn btn-success" onclick="">Sort by Month</a>
-    <a href="Index?f=y&d=@dateStr" class="btn btn-success" onclick="">Sort by Year</a>
+    <a href="Index?f=d&d=@dateStr" class="btn btn-success" onclick="">By Transaction</a>
+    <a href="Index?f=w&d=@dateStr" class="btn btn-success" onclick="">By Day</a>
+    <a href="Index?f=m&d=@dateStr" class="btn btn-success" onclick="">By Week</a>
+    <a href="Index?f=y&d=@dateStr" class="btn btn-success" onclick="">By Month</a>
 </div>
 <div class="lh-50">&nbsp;</div>
 <div class="flex-grid flex-auto">
@@ -104,21 +104,24 @@
     <div id='salesDetails' class='modal fade'>
         <div class="modal-dialog">
             <div class="modal-content">
-                <table id="details">
-                    <thead>
-                        <tr>
-                            <th>Menu</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                    <tfoot>
-                        <tr><td colspan="3">Time: <span id="time"></span></td></tr>
-                        <tr><td colspan="3">Total Price: <span id="total-price"></span></td></tr>
-                        <tr><td colspan="3">Cashier: <span id="cashier"></span></td></tr>
-                    </tfoot>
-                </table>
+                <div align="center">
+                    <table id="details">
+                        <thead>
+                            <tr>
+                                <th class="col-md-4">Menu</th>
+                                <th class="col-md-4">Price</th>
+                                <th class="col-md-4">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr><td colspan="3"><strong>&nbsp;&nbsp;&nbsp;Time:</strong> <span id="time"></span></td></tr>
+                            <tr><td colspan="3"><strong>&nbsp;&nbsp;&nbsp;Total Price:</strong> <span id="total-price"></span></td></tr>
+                            <tr><td colspan="3"><strong>&nbsp;&nbsp;&nbsp;Cashier:</strong> <span id="cashier"></span></td></tr>
+                        </tfoot>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
@@ -157,9 +160,9 @@
 
         for (var i = 0; i < json.length - 1 ; i++) {
             var row = json[i];
-            html += "<tr><td>" + row.name + "</td> \
-            <td>" + row.price + "</td> \
-            <td>" + row.quantity + "</td></tr>";
+            html += "<tr><td class='col-md-4'>" + row.name + "</td> \
+            <td class='col-md-4'>" + row.price + "</td> \
+            <td class='col-md-4'>" + row.quantity + "</td></tr>";
         }
 
 

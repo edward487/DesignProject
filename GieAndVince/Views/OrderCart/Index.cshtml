@@ -170,7 +170,7 @@
                     </div>
                 </div>
                 <div class="form-group flex-grid">
-                    <label class="font-24">Subtotal:</label>
+                    <label class="font-24">Total:</label>
                     &nbsp;
                     <div class="font-24" id="total-price">
                         @Model.OrderTotal
@@ -180,7 +180,8 @@
             </div>
         </div>
 
-        <button class="btn btn-success" type="submit" value="Purchase">Purchase</button>
+        <!-- <button class="btn btn-success col-md-12" type="submit" value="Purchase">Purchase</button> -->
+        <button class="btn btn-success col-md-12" data-toggle="modal" data-target="#confirmOrder">Purchase</button>
         <!-- <button class="btn btn-success" data-toggle="modal" data-target="#myModalEnterAmount">Enter amount</button> -->
 
     </form>
@@ -331,30 +332,50 @@
     </div>
 </div>
 
-<!-- Enter Amount Modal -->
-    <div class="modal fade" id="myModalEnterAmount" tabindex="-1" role="dialog" aria-labelledby="myModalEnterAmountLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h2 class="modal-title text-center" id="myModalEnterAmountLabel">Enter Amount</h2>
-            </div>
-            <div class="modal-body">
-                <!-- Enter Amount Modal Content -->
-                <!--<form action="Payment" method="post"> </form> -->
+<!-- Confirm Order Modal -->
 
-                <h3>Enter Cash:</h3>
-                <input type="number" name="Cash" />
-                <div class="lh-20">&nbsp;</div>
-                <button class="btn btn-success" type="submit" value="Purchase">Purchase</button>
+    <div class="modal fade" id="confirmOrder" tabindex="-1" role="dialog" aria-labelledby="confirmOrderLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title text-center" id="confirmOrderLabel">Confirm Order</h2>
+                </div>
+                <div class="modal-body">
+                    <!-- Enter Amount Modal Content -->
+                    
+                    <div align="center">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.Label("Enter Amount Paid:")
+                            @Html.TextBoxFor(m => m.OrderAmount, new { @class = "form-control", @type = "number" })
+                            <div class="lh-20">&nbsp;</div>
+                            @Html.CheckBoxFor(m => m.isOrderTakeOut , false)
+                            @Html.Label("Take Out")
+                            <div class="lh-20">&nbsp;</div>
+                            <button class="btn btn-success" type="submit" value="Purchase">Confirm</button>
+                        }
 
+                    </div>
+                    
+                    
+                    <!--
+                    <form align="center" action="Payment" method="post">
+                        <p>Enter Amount:</p><input type="number" name="Amount" />
+                        <div class="lh-20">&nbsp;</div>
+                        <button class="btn btn-success" type="submit" value="Purchase">Confirm</button>
+                    </form>
+                    -->
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-</div>
         </div>
     </div>
-</div>
+
 
 
 @section scripts{
@@ -393,11 +414,11 @@
         function createNewRow(data) {
 
             var row = "<tr id=\"row-" + data.OrderId + "\" class=\"appendOrder\" data-menu-id-row=\"" + data.Id + "\" > \
-                                        <td>" + data.Name + "</td> \
-                                        <td data-menu-id=\"" + data.Id + "\" id=\"item-count-" + data.OrderId + "\" class=\"order-status\">1</td> \
-                                        <td>" + data.Price + "</td> \
-                                        <td><a href=\"#\" class=\"RemoveLink close\" data-id=\"" + data.OrderId + "\" data-price=\"" + data.Price + "\" onclick=\"deductQuantity(this)\">x</a></td> \
-                                    </tr >";
+                                                        <td>" + data.Name + "</td> \
+                                                        <td data-menu-id=\"" + data.Id + "\" id=\"item-count-" + data.OrderId + "\" class=\"order-status\">1</td> \
+                                                        <td>" + data.Price + "</td> \
+                                                        <td><a href=\"#\" class=\"RemoveLink close\" data-id=\"" + data.OrderId + "\" data-price=\"" + data.Price + "\" onclick=\"deductQuantity(this)\">x</a></td> \
+                                                    </tr >";
 
             $("#tbl-body").append(row);
 

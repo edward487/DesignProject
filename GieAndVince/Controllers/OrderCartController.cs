@@ -104,6 +104,23 @@ namespace GieAndVince.Controllers
         }
         */
 
+        /*
+        [HttpPost]
+        public ActionResult Amount(OrderCartViewModel model)
+        {
+            var Amount = new 
+
+            return OrderAmount();
+        }
+        */
+
+        [HttpPost]
+        public ActionResult Index(OrderCartViewModel u)
+        {
+            ViewBag.OrderAmount = u.OrderAmount;
+            return View();
+        }
+
         public ActionResult Payment()
         {
 
@@ -165,7 +182,6 @@ namespace GieAndVince.Controllers
             printer.PrintBoldLn("Gie And Vince");
             printer.PrintLn("      94 CM Recto Street Tayabas City");
             printer.PrintBoldLn("");
-            printer.PrintLn("Transaction ID:");
             printer.PrintLn("Qty  Item                            Price");
             printer.PrintLn("");
             double total = 0;
@@ -180,17 +196,16 @@ namespace GieAndVince.Controllers
         
             printer.PrintLn(new string('-', maxWidth));
             printer.PrintLn("TOTAL:" + new string(' ', 36-total.ToString("0.00").Length) + total.ToString("0.00"));
-            printer.PrintLn("CASH:");
-            printer.PrintLn("CHANGE:");
             if (Session["UserName"] != null)
             {
                 printer.PrintLn("Cashier:" + Session["UserName"]);
             }
             else {
-                printer.PrintLn("Cashier:" +  Session["UserName"] +":" +"NA");
+                printer.PrintLn("Cashier:" +  Session["UserName"] +"NA");
             }
             
             printer.PrintLn("DATE:" + DateTime.Now.ToString());
+            printer.PrintLn("Contact #: (042) 793-2821 / 09228742817");
             printer.PrintLn("");
             printer.PrintLn("       Thankyou and please come again!");
             printer.PrintLn("");

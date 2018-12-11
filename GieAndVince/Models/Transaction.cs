@@ -28,6 +28,11 @@ namespace GieAndVince.Models
             return GetCart(controller.HttpContext);
         }
 
+        internal int GetAmount()
+        {
+            throw new NotImplementedException();
+        }
+
         //Were using HttpContextbase to allow access to cookies
         public string GetCartId(HttpContextBase context)
         {

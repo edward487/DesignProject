@@ -12,5 +12,7 @@ namespace GieAndVince.Models.ViewModel
         public List<Cart> OrderItems { get; set; }
         public int OrderTotal { get; set; }
         public int OrderCount { get; set; }
+        public int OrderAmount { get; set; }
+        public bool isOrderTakeOut { get; set; }
     }
 }
