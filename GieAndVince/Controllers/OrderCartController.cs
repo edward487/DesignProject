@@ -97,42 +97,28 @@ namespace GieAndVince.Controllers
         }
 
         /*
-        public ActionResult EnterAmount(FormCollection collection)
+        public ActionResult OrderConfirmForm(Models.OrderConfirm sm)
         {
-            string amountPaid = collection.Get("Amount");
-            return amountPaid("EnterAmount");
+
+
         }
         */
 
-        /*
-        [HttpPost]
-        public ActionResult Amount(OrderCartViewModel model)
+        public ActionResult Payment(Models.OrderConfirm sm)
         {
-            var Amount = new 
-
-            return OrderAmount();
-        }
-        */
-
-        [HttpPost]
-        public ActionResult Index(OrderCartViewModel u)
-        {
-            ViewBag.OrderAmount = u.OrderAmount;
-            return View();
-        }
-
-        public ActionResult Payment()
-        {
-
             var orders = db.Carts.ToList();
 
-            double totalPrice = 0;
+            ViewBag.OrderAmount = sm.OrderAmount;
 
+            double totalPrice = 0;
+            
             foreach (var order in orders)
             {
                 int quantity = order.Count == null ? 1 : order.Count.Value;
                 totalPrice += (double)(order.MIRPrice * quantity);
             }
+
+            var change = ViewBag.OrderAmount - totalPrice;
 
             using (GVDBEntities db = new GVDBEntities())
             {

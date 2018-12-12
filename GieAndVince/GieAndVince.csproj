@@ -217,6 +217,7 @@
     <Compile Include="Models\Db\TransactionItem.cs">
       <DependentUpon>GVDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderConfirm.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\ViewModel\AccountViewModel.cs" />
     <Compile Include="Models\ViewModel\CartViewModel.cs" />
